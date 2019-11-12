@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace OOP_TSU_Protocol
 {
-    public partial class FootballForm : Form
+    public partial class MinuteLabel : Form
     {
         private readonly IList<FootballTeam> _teamsList =
             new List<FootballTeam>()
@@ -35,9 +35,10 @@ namespace OOP_TSU_Protocol
                 }
             };
 
+        enum EventType {Goal, YellowCard, RedCard};
         private IList<FootballTeam> _teams;
 
-        public FootballForm()
+        public MinuteLabel()
         {
             InitializeComponent();
             AddData();
@@ -51,6 +52,16 @@ namespace OOP_TSU_Protocol
             {
                 _teams[i].AddPlayers(_playersList[i]);
             }
+        }
+
+        private void HomeTeamInput_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            HomeTeamInput.Enabled = false;
+        }
+
+        private void GuestTeamInput_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            GuestTeamInput.Enabled = false;
         }
     }
 }
