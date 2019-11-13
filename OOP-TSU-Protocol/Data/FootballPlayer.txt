@@ -1,0 +1,4 @@
+﻿Arsenal;10;Mesut Özil
+Arsenal;19;Nicolas Pépé
+Bournemouth;5;Nathan Aké
+Bournemouth;13;Callum Wilson

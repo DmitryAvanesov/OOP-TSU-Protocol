@@ -1,6 +1,6 @@
 ﻿namespace OOP_TSU_Protocol
 {
-    partial class MinuteLabel
+    partial class FootballForm
     {
         /// <summary>
         /// Required designer variable.
@@ -39,11 +39,14 @@
             this.GuestTeamLabel = new System.Windows.Forms.Label();
             this.HomeTeamInput = new System.Windows.Forms.ComboBox();
             this.GuestTeamInput = new System.Windows.Forms.ComboBox();
+            this.PlayerInput = new System.Windows.Forms.ComboBox();
+            this.PlayerLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.MinuteInput)).BeginInit();
             this.SuspendLayout();
             // 
             // MinuteInput
             // 
+            this.MinuteInput.Enabled = false;
             this.MinuteInput.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.MinuteInput.Location = new System.Drawing.Point(20, 313);
             this.MinuteInput.Maximum = new decimal(new int[] {
@@ -87,6 +90,7 @@
             // 
             // EventTypeInput
             // 
+            this.EventTypeInput.Enabled = false;
             this.EventTypeInput.FormattingEnabled = true;
             this.EventTypeInput.Location = new System.Drawing.Point(207, 325);
             this.EventTypeInput.Name = "EventTypeInput";
@@ -107,7 +111,7 @@
             // 
             this.DateLabel.AutoSize = true;
             this.DateLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.DateLabel.Location = new System.Drawing.Point(12, 9);
+            this.DateLabel.Location = new System.Drawing.Point(513, 9);
             this.DateLabel.Name = "DateLabel";
             this.DateLabel.Size = new System.Drawing.Size(104, 46);
             this.DateLabel.TabIndex = 5;
@@ -115,7 +119,8 @@
             // 
             // DateInput
             // 
-            this.DateInput.Location = new System.Drawing.Point(20, 59);
+            this.DateInput.Enabled = false;
+            this.DateInput.Location = new System.Drawing.Point(521, 59);
             this.DateInput.Name = "DateInput";
             this.DateInput.Size = new System.Drawing.Size(183, 22);
             this.DateInput.TabIndex = 6;
@@ -124,7 +129,7 @@
             // 
             this.HomeTeamLabel.AutoSize = true;
             this.HomeTeamLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.HomeTeamLabel.Location = new System.Drawing.Point(228, 9);
+            this.HomeTeamLabel.Location = new System.Drawing.Point(12, 9);
             this.HomeTeamLabel.Name = "HomeTeamLabel";
             this.HomeTeamLabel.Size = new System.Drawing.Size(226, 46);
             this.HomeTeamLabel.TabIndex = 7;
@@ -134,7 +139,7 @@
             // 
             this.GuestTeamLabel.AutoSize = true;
             this.GuestTeamLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.GuestTeamLabel.Location = new System.Drawing.Point(460, 9);
+            this.GuestTeamLabel.Location = new System.Drawing.Point(244, 9);
             this.GuestTeamLabel.Name = "GuestTeamLabel";
             this.GuestTeamLabel.Size = new System.Drawing.Size(225, 46);
             this.GuestTeamLabel.TabIndex = 8;
@@ -143,7 +148,7 @@
             // HomeTeamInput
             // 
             this.HomeTeamInput.FormattingEnabled = true;
-            this.HomeTeamInput.Location = new System.Drawing.Point(236, 59);
+            this.HomeTeamInput.Location = new System.Drawing.Point(20, 59);
             this.HomeTeamInput.Name = "HomeTeamInput";
             this.HomeTeamInput.Size = new System.Drawing.Size(218, 24);
             this.HomeTeamInput.TabIndex = 9;
@@ -152,17 +157,38 @@
             // GuestTeamInput
             // 
             this.GuestTeamInput.FormattingEnabled = true;
-            this.GuestTeamInput.Location = new System.Drawing.Point(468, 59);
+            this.GuestTeamInput.Location = new System.Drawing.Point(252, 59);
             this.GuestTeamInput.Name = "GuestTeamInput";
             this.GuestTeamInput.Size = new System.Drawing.Size(217, 24);
             this.GuestTeamInput.TabIndex = 10;
             this.GuestTeamInput.SelectedIndexChanged += new System.EventHandler(this.GuestTeamInput_SelectedIndexChanged);
             // 
-            // MinuteLabel
+            // PlayerInput
+            // 
+            this.PlayerInput.Enabled = false;
+            this.PlayerInput.FormattingEnabled = true;
+            this.PlayerInput.Location = new System.Drawing.Point(20, 459);
+            this.PlayerInput.Name = "PlayerInput";
+            this.PlayerInput.Size = new System.Drawing.Size(199, 24);
+            this.PlayerInput.TabIndex = 12;
+            // 
+            // PlayerLabel
+            // 
+            this.PlayerLabel.AutoSize = true;
+            this.PlayerLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.PlayerLabel.Location = new System.Drawing.Point(12, 398);
+            this.PlayerLabel.Name = "PlayerLabel";
+            this.PlayerLabel.Size = new System.Drawing.Size(133, 46);
+            this.PlayerLabel.TabIndex = 11;
+            this.PlayerLabel.Text = "Player";
+            // 
+            // FootballForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1582, 853);
+            this.Controls.Add(this.PlayerInput);
+            this.Controls.Add(this.PlayerLabel);
             this.Controls.Add(this.GuestTeamInput);
             this.Controls.Add(this.HomeTeamInput);
             this.Controls.Add(this.GuestTeamLabel);
@@ -174,7 +200,7 @@
             this.Controls.Add(this.EventTypeLabel);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.MinuteInput);
-            this.Name = "MinuteLabel";
+            this.Name = "FootballForm";
             this.Text = "Football";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             ((System.ComponentModel.ISupportInitialize)(this.MinuteInput)).EndInit();
@@ -196,5 +222,7 @@
         private System.Windows.Forms.Label GuestTeamLabel;
         private System.Windows.Forms.ComboBox HomeTeamInput;
         private System.Windows.Forms.ComboBox GuestTeamInput;
+        private System.Windows.Forms.ComboBox PlayerInput;
+        private System.Windows.Forms.Label PlayerLabel;
     }
 }

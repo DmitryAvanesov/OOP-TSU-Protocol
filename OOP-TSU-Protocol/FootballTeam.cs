@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,21 +9,27 @@ namespace OOP_TSU_Protocol
 {
     class FootballTeam
     {
+        const string PathToFootballPlayerTXT =
+            @"C:\Users\DmitryAvanesov\source\repos\OOP-TSU-Protocol\OOP-TSU-Protocol\Data\FootballPlayer.txt";
+
         private List<FootballPlayer> _teamPlayers;
-        private string _name;
+        public string Name { get; private set; }
         private string _location;
 
-        public FootballTeam(string thisName, string thisLocation)
+        public FootballTeam(string[] data)
         {
-            _name = thisName;
-            _location = thisLocation;
+            Name = data[0];
+            _location = data[1];
 
             _teamPlayers = new List<FootballPlayer>();
         }
 
-        public void AddPlayers(IList<FootballPlayer> thisTeamPlayers)
+        public void AddPlayers()
         {
-            _teamPlayers.AddRange(thisTeamPlayers);
+            foreach (string line in File.ReadAllLines(PathToFootballPlayerTXT))
+            {
+                _teamPlayers.Add(new FootballPlayer(line.Split(';')));
+            }
         }
     }
 }

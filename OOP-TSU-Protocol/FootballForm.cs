@@ -1,67 +1,79 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
+using System.Data.SqlClient;
+using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace OOP_TSU_Protocol
 {
-    public partial class MinuteLabel : Form
+    public partial class FootballForm : Form
     {
-        private readonly IList<FootballTeam> _teamsList =
-            new List<FootballTeam>()
-            {
-                new FootballTeam("Liverpool F.C.", "Liverpool, England"),
-                new FootballTeam("Manchester City F.C.", "Manchester, England")
-            };
-
-        private readonly IList<List<FootballPlayer>> _playersList =
-            new List<List<FootballPlayer>>()
-            {
-                new List<FootballPlayer>()
-                {
-                    new FootballPlayer(11, "Mohamed Salah"),
-                    new FootballPlayer(14, "Jordan Henderson")
-                },
-
-                new List<FootballPlayer>()
-                {
-                    new FootballPlayer(10, "Sergio Agüero"),
-                    new FootballPlayer(11, "Oleksandr Zinchenko")
-                }
-            };
+        const string PathToFootballTeamTXT =
+            @"C:\Users\DmitryAvanesov\source\repos\OOP-TSU-Protocol\OOP-TSU-Protocol\Data\FootballTeam.txt";
 
         enum EventType {Goal, YellowCard, RedCard};
         private IList<FootballTeam> _teams;
+        private IList<FootballTeamComboItem> _teamComboItems;
 
-        public MinuteLabel()
+        public FootballForm()
         {
             InitializeComponent();
-            AddData();
+
+            _teams = new List<FootballTeam>();
+            _teamComboItems = new List<FootballTeamComboItem>();
+            AddTeams();
         }
 
-        private void AddData()
+        private void AddTeams()
         {
-            _teams = _teamsList;
+            FootballTeam currentTeam;
 
-            for (int i = 0; i < _teams.Count; i++)
+            foreach (string line in File.ReadAllLines(PathToFootballTeamTXT))
             {
-                _teams[i].AddPlayers(_playersList[i]);
+                currentTeam = new FootballTeam(line.Split(';'));
+
+                _teams.Add(currentTeam);
+                _teamComboItems.Add(new FootballTeamComboItem(currentTeam.Name, currentTeam));
             }
+
+            HomeTeamInput.Items.AddRange(_teamComboItems.Cast<object>().ToArray());
+            GuestTeamInput.Items.AddRange(_teamComboItems.Cast<object>().ToArray());
         }
 
         private void HomeTeamInput_SelectedIndexChanged(object sender, EventArgs e)
         {
             HomeTeamInput.Enabled = false;
+
+            if (!GuestTeamInput.Enabled)
+            {
+                EnableInput();
+            }
+            else
+            {
+                GuestTeamInput.Items.Remove(HomeTeamInput.SelectedItem);
+            }
         }
 
         private void GuestTeamInput_SelectedIndexChanged(object sender, EventArgs e)
         {
             GuestTeamInput.Enabled = false;
+
+            if (!HomeTeamInput.Enabled)
+            {
+                EnableInput();
+            }
+            else {
+                HomeTeamInput.Items.Remove(GuestTeamInput.SelectedItem);
+            }
+        }
+
+        private void EnableInput()
+        {
+            DateInput.Enabled = true;
+            MinuteInput.Enabled = true;
+            EventTypeInput.Enabled = true;
+            PlayerInput.Enabled = true;
         }
     }
 }

@@ -8,13 +8,15 @@ namespace OOP_TSU_Protocol
 {
     class FootballPlayer
     {
-        private int _number;
-        public string _name;
+        private string _team;
+        private string _number;
+        private string _name;
 
-        public FootballPlayer(int thisNumber, string thisName)
+        public FootballPlayer(string[] data)
         {
-            _number = thisNumber;
-            _name = thisName;
+            _team = data[0];
+            _number = data[1];
+            _name = data[2];
         }
     }
 }

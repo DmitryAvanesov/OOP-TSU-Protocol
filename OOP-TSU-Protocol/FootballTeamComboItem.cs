@@ -6,20 +6,20 @@ using System.Threading.Tasks;
 
 namespace OOP_TSU_Protocol
 {
-    class FootballComboItem
+    class FootballTeamComboItem
     {
         public string Name { get; private set; }
-        public FootballPlayer Player { get; private set; }
+        public FootballTeam Team { get; private set; }
 
         public override string ToString()
         {
             return Name;
         }
 
-        public FootballComboItem(string thisName, FootballPlayer thisPlayer)
+        public FootballTeamComboItem(string thisName, FootballTeam thisTeam)
         {
             Name = thisName;
-            Player = thisPlayer;
+            Team = thisTeam;
         }
     }
 }
