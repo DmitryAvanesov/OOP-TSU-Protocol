@@ -12,7 +12,7 @@ namespace OOP_TSU_Protocol
         const string PathToFootballPlayerTXT =
             @"C:\Users\DmitryAvanesov\source\repos\OOP-TSU-Protocol\OOP-TSU-Protocol\Data\FootballPlayer.txt";
 
-        private List<FootballPlayer> _teamPlayers;
+        public List<FootballPlayer> TeamPlayers;
         public string Name { get; private set; }
         private string _location;
 
@@ -21,14 +21,14 @@ namespace OOP_TSU_Protocol
             Name = data[0];
             _location = data[1];
 
-            _teamPlayers = new List<FootballPlayer>();
+            TeamPlayers = new List<FootballPlayer>();
         }
 
         public void AddPlayers()
         {
             foreach (string line in File.ReadAllLines(PathToFootballPlayerTXT))
             {
-                _teamPlayers.Add(new FootballPlayer(line.Split(';')));
+                TeamPlayers.Add(new FootballPlayer(line.Split(';')));
             }
         }
     }

@@ -10,13 +10,13 @@ namespace OOP_TSU_Protocol
     {
         private string _team;
         private string _number;
-        private string _name;
+        public string Name { get; private set; }
 
         public FootballPlayer(string[] data)
         {
             _team = data[0];
             _number = data[1];
-            _name = data[2];
+            Name = data[2];
         }
     }
 }

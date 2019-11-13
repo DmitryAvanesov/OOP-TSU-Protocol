@@ -21,5 +21,10 @@ namespace OOP_TSU_Protocol
             Name = thisName;
             Team = thisTeam;
         }
+
+        public void Suck()
+        {
+
+        }
     }
 }

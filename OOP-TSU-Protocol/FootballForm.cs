@@ -15,6 +15,7 @@ namespace OOP_TSU_Protocol
         enum EventType {Goal, YellowCard, RedCard};
         private IList<FootballTeam> _teams;
         private IList<FootballTeamComboItem> _teamComboItems;
+        private IList<FootballPlayerComboItem> _playerComboItems;
 
         public FootballForm()
         {
@@ -22,6 +23,8 @@ namespace OOP_TSU_Protocol
 
             _teams = new List<FootballTeam>();
             _teamComboItems = new List<FootballTeamComboItem>();
+            _playerComboItems = new List<FootballPlayerComboItem>();
+
             AddTeams();
         }
 
@@ -37,6 +40,7 @@ namespace OOP_TSU_Protocol
                 _teamComboItems.Add(new FootballTeamComboItem(currentTeam.Name, currentTeam));
             }
 
+            // comboboxes for teams' choosing
             HomeTeamInput.Items.AddRange(_teamComboItems.Cast<object>().ToArray());
             GuestTeamInput.Items.AddRange(_teamComboItems.Cast<object>().ToArray());
         }
@@ -44,6 +48,14 @@ namespace OOP_TSU_Protocol
         private void HomeTeamInput_SelectedIndexChanged(object sender, EventArgs e)
         {
             HomeTeamInput.Enabled = false;
+            var selectedItem = (FootballTeamComboItem)HomeTeamInput.SelectedItem;
+
+            Console.WriteLine(selectedItem.Team.TeamPlayers.Count);
+            foreach (FootballPlayer player in selectedItem.Team.TeamPlayers)
+            {
+                _playerComboItems.Add(new FootballPlayerComboItem(player.Name, player));
+            }
+            PlayerInput.Items.AddRange(_playerComboItems.Cast<object>().ToArray());
 
             if (!GuestTeamInput.Enabled)
             {
