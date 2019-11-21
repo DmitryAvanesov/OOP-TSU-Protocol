@@ -1,30 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.SqlClient;
 using System.IO;
-using System.Linq;
 using System.Windows.Forms;
 
 namespace OOP_TSU_Protocol
 {
     public partial class FootballForm : Form
     {
-        const string PathToFootballTeamTXT =
-            @"C:\Users\DmitryAvanesov\source\repos\OOP-TSU-Protocol\OOP-TSU-Protocol\Data\FootballTeam.txt";
+        string PathToFootballTeamTXT = @"\..\..\Data\FootballTeam.txt";
 
-        enum EventType {Goal, YellowCard, RedCard};
+        UserInterface userInterface;
         private IList<FootballTeam> _teams;
-        private IList<FootballTeamComboItem> _teamComboItems;
-        private IList<FootballPlayerComboItem> _playerComboItems;
 
         public FootballForm()
         {
             InitializeComponent();
 
+            userInterface = new UserInterface(HomeTeamInput, GuestTeamInput, DateInput, MinuteInput, EventTypeInput, PlayerInput);
             _teams = new List<FootballTeam>();
-            _teamComboItems = new List<FootballTeamComboItem>();
-            _playerComboItems = new List<FootballPlayerComboItem>();
-
             AddTeams();
         }
 
@@ -32,60 +25,24 @@ namespace OOP_TSU_Protocol
         {
             FootballTeam currentTeam;
 
-            foreach (string line in File.ReadAllLines(PathToFootballTeamTXT))
+            foreach (string line in File.ReadAllLines(Directory.GetCurrentDirectory() + PathToFootballTeamTXT))
             {
                 currentTeam = new FootballTeam(line.Split(';'));
-
                 _teams.Add(currentTeam);
-                _teamComboItems.Add(new FootballTeamComboItem(currentTeam.Name, currentTeam));
+                userInterface.AddComboItem(currentTeam);
             }
 
-            // comboboxes for teams' choosing
-            HomeTeamInput.Items.AddRange(_teamComboItems.Cast<object>().ToArray());
-            GuestTeamInput.Items.AddRange(_teamComboItems.Cast<object>().ToArray());
+            userInterface.AddComboItemsToComboBox();
         }
 
         private void HomeTeamInput_SelectedIndexChanged(object sender, EventArgs e)
         {
-            HomeTeamInput.Enabled = false;
-            var selectedItem = (FootballTeamComboItem)HomeTeamInput.SelectedItem;
-
-            Console.WriteLine(selectedItem.Team.TeamPlayers.Count);
-            foreach (FootballPlayer player in selectedItem.Team.TeamPlayers)
-            {
-                _playerComboItems.Add(new FootballPlayerComboItem(player.Name, player));
-            }
-            PlayerInput.Items.AddRange(_playerComboItems.Cast<object>().ToArray());
-
-            if (!GuestTeamInput.Enabled)
-            {
-                EnableInput();
-            }
-            else
-            {
-                GuestTeamInput.Items.Remove(HomeTeamInput.SelectedItem);
-            }
+            userInterface.OnTeamInputIndexChange(HomeTeamInput, GuestTeamInput);
         }
 
         private void GuestTeamInput_SelectedIndexChanged(object sender, EventArgs e)
         {
-            GuestTeamInput.Enabled = false;
-
-            if (!HomeTeamInput.Enabled)
-            {
-                EnableInput();
-            }
-            else {
-                HomeTeamInput.Items.Remove(GuestTeamInput.SelectedItem);
-            }
-        }
-
-        private void EnableInput()
-        {
-            DateInput.Enabled = true;
-            MinuteInput.Enabled = true;
-            EventTypeInput.Enabled = true;
-            PlayerInput.Enabled = true;
+            userInterface.OnTeamInputIndexChange(GuestTeamInput, HomeTeamInput);
         }
     }
 }

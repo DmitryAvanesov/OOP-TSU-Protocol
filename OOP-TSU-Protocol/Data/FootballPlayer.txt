@@ -1,4 +1,4 @@
-﻿Arsenal;10;Mesut Özil
-Arsenal;19;Nicolas Pépé
-Bournemouth;5;Nathan Aké
-Bournemouth;13;Callum Wilson
+﻿0;10;Mesut Özil
+0;19;Nicolas Pépé
+2;5;Nathan Aké
+2;13;Callum Wilson
