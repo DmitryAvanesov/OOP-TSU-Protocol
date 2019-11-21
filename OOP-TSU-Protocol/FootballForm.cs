@@ -29,10 +29,10 @@ namespace OOP_TSU_Protocol
             {
                 currentTeam = new FootballTeam(line.Split(';'));
                 _teams.Add(currentTeam);
-                userInterface.AddComboItem(currentTeam);
+                userInterface.AddTeamComboItem(currentTeam);
             }
 
-            userInterface.AddComboItemsToComboBox();
+            userInterface.AddTeamComboItemsToComboBox();
         }
 
         private void HomeTeamInput_SelectedIndexChanged(object sender, EventArgs e)

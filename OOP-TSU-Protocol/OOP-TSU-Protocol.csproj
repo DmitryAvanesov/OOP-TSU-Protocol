@@ -56,7 +56,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EventTypeComboItem.cs" />
     <Compile Include="FootballPlayerComboItem.cs" />
     <Compile Include="FootballForm.cs">
       <SubType>Form</SubType>

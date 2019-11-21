@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -6,39 +8,59 @@ namespace OOP_TSU_Protocol
 {
     class UserInterface
     {
-        ComboBox homeTeamInput;
-        ComboBox guestTeamInput;
-        DateTimePicker dateInput;
-        NumericUpDown minuteInput;
-        ComboBox eventTypeInput;
-        ComboBox playerInput;
+        public enum FootballEventType {
+            [Description("Goal")] Goal,
+            [Description("Yellow card")] YellowCard,
+            [Description("Red card")] RedCard
+        };
+
+        private ComboBox _homeTeamInput;
+        private ComboBox _guestTeamInput;
+        private DateTimePicker _dateInput;
+        private NumericUpDown _minuteInput;
+        private ComboBox _eventTypeInput;
+        private ComboBox _playerInput;
 
         private IList<FootballTeamComboItem> _teamComboItems;
         private IList<FootballPlayerComboItem> _playerComboItems;
+        private IList<FootballEventType> _eventComboItems;
 
         public UserInterface(ComboBox newHomeTeamInput, ComboBox newGuestTeamInput, DateTimePicker newDateInput,
         NumericUpDown newMinuteInput, ComboBox newEventTypeInput, ComboBox newPlayerInput)
         {
-            homeTeamInput = newHomeTeamInput;
-            guestTeamInput = newGuestTeamInput;
-            dateInput = newDateInput;
-            minuteInput = newMinuteInput;
-            eventTypeInput = newEventTypeInput;
-            playerInput = newPlayerInput;
+            _homeTeamInput = newHomeTeamInput;
+            _guestTeamInput = newGuestTeamInput;
+            _dateInput = newDateInput;
+            _minuteInput = newMinuteInput;
+            _eventTypeInput = newEventTypeInput;
+            _playerInput = newPlayerInput;
 
             _teamComboItems = new List<FootballTeamComboItem>();
             _playerComboItems = new List<FootballPlayerComboItem>();
+            _eventComboItems = new List<FootballEventType>();
+
+            AddEventTypeItems();
         }
 
-        public void AddComboItem(FootballTeam currentTeam)
+        private void AddEventTypeItems()
+        {
+            foreach (FootballEventType type in (FootballEventType[])Enum.GetValues(typeof(FootballEventType)))
+            {
+                _eventComboItems.Add(type);
+            }
+
+            _eventTypeInput.Items.AddRange(_eventComboItems.Cast<object>().ToArray());
+        }
+
+        public void AddTeamComboItem(FootballTeam currentTeam)
         {
             _teamComboItems.Add(new FootballTeamComboItem(currentTeam.Name, currentTeam));
         }
 
-        public void AddComboItemsToComboBox()
+        public void AddTeamComboItemsToComboBox()
         {
-            homeTeamInput.Items.AddRange(_teamComboItems.Cast<object>().ToArray());
-            guestTeamInput.Items.AddRange(_teamComboItems.Cast<object>().ToArray());
+            _homeTeamInput.Items.AddRange(_teamComboItems.Cast<object>().ToArray());
+            _guestTeamInput.Items.AddRange(_teamComboItems.Cast<object>().ToArray());
         }
 
         public void OnTeamInputIndexChange(ComboBox thisTeamInput, ComboBox otherTeamInput)
@@ -51,7 +73,7 @@ namespace OOP_TSU_Protocol
                 _playerComboItems.Add(new FootballPlayerComboItem(player.Name, player));
             }
 
-            playerInput.Items.AddRange(_playerComboItems.Cast<object>().ToArray());
+            _playerInput.Items.AddRange(_playerComboItems.Cast<object>().ToArray());
             _playerComboItems.Clear();
 
             if (!otherTeamInput.Enabled)
@@ -66,10 +88,10 @@ namespace OOP_TSU_Protocol
 
         private void EnableInput()
         {
-            dateInput.Enabled = true;
-            minuteInput.Enabled = true;
-            eventTypeInput.Enabled = true;
-            playerInput.Enabled = true;
+            _dateInput.Enabled = true;
+            _minuteInput.Enabled = true;
+            _eventTypeInput.Enabled = true;
+            _playerInput.Enabled = true;
         }
     }
 }
