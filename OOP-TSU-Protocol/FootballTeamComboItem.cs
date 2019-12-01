@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace OOP_TSU_Protocol
+﻿namespace OOP_TSU_Protocol
 {
     class FootballTeamComboItem
     {
@@ -20,11 +14,6 @@ namespace OOP_TSU_Protocol
         {
             Name = thisName;
             Team = thisTeam;
-        }
-
-        public void Suck()
-        {
-
         }
     }
 }

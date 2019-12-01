@@ -49,6 +49,7 @@
             this.MinuteInput.Enabled = false;
             this.MinuteInput.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.MinuteInput.Location = new System.Drawing.Point(20, 313);
+            this.MinuteInput.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.MinuteInput.Maximum = new decimal(new int[] {
             90,
             0,
@@ -72,7 +73,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label1.Location = new System.Drawing.Point(12, 264);
+            this.label1.Location = new System.Drawing.Point(12, 263);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(139, 46);
             this.label1.TabIndex = 1;
@@ -82,7 +83,7 @@
             // 
             this.EventTypeLabel.AutoSize = true;
             this.EventTypeLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.EventTypeLabel.Location = new System.Drawing.Point(199, 264);
+            this.EventTypeLabel.Location = new System.Drawing.Point(199, 263);
             this.EventTypeLabel.Name = "EventTypeLabel";
             this.EventTypeLabel.Size = new System.Drawing.Size(207, 46);
             this.EventTypeLabel.TabIndex = 2;
@@ -93,6 +94,8 @@
             this.EventTypeInput.Enabled = false;
             this.EventTypeInput.FormattingEnabled = true;
             this.EventTypeInput.Location = new System.Drawing.Point(207, 325);
+            this.EventTypeInput.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.EventTypeInput.MaxDropDownItems = 100;
             this.EventTypeInput.Name = "EventTypeInput";
             this.EventTypeInput.Size = new System.Drawing.Size(199, 24);
             this.EventTypeInput.TabIndex = 3;
@@ -102,7 +105,8 @@
             this.panel1.AllowDrop = true;
             this.panel1.BackColor = System.Drawing.Color.Gainsboro;
             this.panel1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel1.Location = new System.Drawing.Point(782, 0);
+            this.panel1.Location = new System.Drawing.Point(781, 0);
+            this.panel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(800, 853);
             this.panel1.TabIndex = 4;
@@ -111,7 +115,7 @@
             // 
             this.DateLabel.AutoSize = true;
             this.DateLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.DateLabel.Location = new System.Drawing.Point(513, 9);
+            this.DateLabel.Location = new System.Drawing.Point(15, 137);
             this.DateLabel.Name = "DateLabel";
             this.DateLabel.Size = new System.Drawing.Size(104, 46);
             this.DateLabel.TabIndex = 5;
@@ -120,7 +124,8 @@
             // DateInput
             // 
             this.DateInput.Enabled = false;
-            this.DateInput.Location = new System.Drawing.Point(521, 59);
+            this.DateInput.Location = new System.Drawing.Point(23, 187);
+            this.DateInput.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.DateInput.Name = "DateInput";
             this.DateInput.Size = new System.Drawing.Size(183, 22);
             this.DateInput.TabIndex = 6;
@@ -149,8 +154,9 @@
             // 
             this.HomeTeamInput.FormattingEnabled = true;
             this.HomeTeamInput.Location = new System.Drawing.Point(20, 59);
+            this.HomeTeamInput.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.HomeTeamInput.Name = "HomeTeamInput";
-            this.HomeTeamInput.Size = new System.Drawing.Size(218, 24);
+            this.HomeTeamInput.Size = new System.Drawing.Size(217, 24);
             this.HomeTeamInput.TabIndex = 9;
             this.HomeTeamInput.SelectedIndexChanged += new System.EventHandler(this.HomeTeamInput_SelectedIndexChanged);
             // 
@@ -158,6 +164,7 @@
             // 
             this.GuestTeamInput.FormattingEnabled = true;
             this.GuestTeamInput.Location = new System.Drawing.Point(252, 59);
+            this.GuestTeamInput.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.GuestTeamInput.Name = "GuestTeamInput";
             this.GuestTeamInput.Size = new System.Drawing.Size(217, 24);
             this.GuestTeamInput.TabIndex = 10;
@@ -168,6 +175,7 @@
             this.PlayerInput.Enabled = false;
             this.PlayerInput.FormattingEnabled = true;
             this.PlayerInput.Location = new System.Drawing.Point(20, 459);
+            this.PlayerInput.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.PlayerInput.Name = "PlayerInput";
             this.PlayerInput.Size = new System.Drawing.Size(199, 24);
             this.PlayerInput.TabIndex = 12;
@@ -186,7 +194,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1582, 853);
+            this.ClientSize = new System.Drawing.Size(1581, 853);
             this.Controls.Add(this.PlayerInput);
             this.Controls.Add(this.PlayerLabel);
             this.Controls.Add(this.GuestTeamInput);
@@ -200,6 +208,7 @@
             this.Controls.Add(this.EventTypeLabel);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.MinuteInput);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "FootballForm";
             this.Text = "Football";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;

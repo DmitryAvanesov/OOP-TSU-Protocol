@@ -1,25 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OOP_TSU_Protocol
 {
     class FootballTeam
     {
-        const string PathToFootballPlayerTXT =
-            @"C:\Users\DmitryAvanesov\source\repos\OOP-TSU-Protocol\OOP-TSU-Protocol\Data\FootballPlayer.txt";
+        const string PathToFootballPlayerTXT = @"\..\..\Data\FootballPlayer.txt";
 
-        public List<FootballPlayer> TeamPlayers;
+        public IList<FootballPlayer> TeamPlayers;
         public string Name { get; private set; }
+        private int _id;
         private string _location;
 
         public FootballTeam(string[] data)
         {
-            Name = data[0];
-            _location = data[1];
+            _id = int.Parse(data[0]);
+            Name = data[1];
+            _location = data[2];
 
             TeamPlayers = new List<FootballPlayer>();
             AddPlayers();
@@ -27,9 +24,14 @@ namespace OOP_TSU_Protocol
 
         public void AddPlayers()
         {
-            foreach (string line in File.ReadAllLines(PathToFootballPlayerTXT))
+            foreach (string line in File.ReadAllLines(Directory.GetCurrentDirectory() + PathToFootballPlayerTXT))
             {
-                TeamPlayers.Add(new FootballPlayer(line.Split(';')));
+                int currentTeamId = int.Parse(line.Split(';')[0]);
+
+                if (currentTeamId == _id)
+                {
+                    TeamPlayers.Add(new FootballPlayer(line.Split(';')));
+                }
             }
         }
     }

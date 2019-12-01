@@ -1,4 +1,4 @@
-﻿Arsenal;London
-Aston Villa;Birmingham
-Bournemouth;Bournemouth
-Brighton;Brighton
+﻿0;Arsenal;London
+1;Aston Villa;Birmingham
+2;Bournemouth;Bournemouth
+3;Brighton;Brighton
