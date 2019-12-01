@@ -6,19 +6,19 @@ namespace OOP_TSU_Protocol
 {
     public partial class MainForm : Form
     {
-        private FootballForm _footballForm;
+        private ProtocolForm _protocolForm;
 
         public MainForm()
         {
             InitializeComponent();
             
-            _footballForm = new FootballForm();
+            _protocolForm = new ProtocolForm();
         }
 
         private void FootballButton_Click(object sender, EventArgs e)
         {
             Hide();
-            _footballForm.Show();
+            _protocolForm.Show();
         }
     }
 }

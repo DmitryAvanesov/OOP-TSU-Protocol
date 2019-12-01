@@ -7,7 +7,7 @@ using System.Windows.Forms;
 
 namespace OOP_TSU_Protocol
 {
-    public partial class FootballForm : Form
+    public partial class ProtocolForm : Form
     {
         const string PathToFootballTeamTXT =
             @"C:\Users\DmitryAvanesov\source\repos\OOP-TSU-Protocol\OOP-TSU-Protocol\Data\FootballTeam.txt";
@@ -17,7 +17,7 @@ namespace OOP_TSU_Protocol
         private IList<FootballTeamComboItem> _teamComboItems;
         private IList<FootballPlayerComboItem> _playerComboItems;
 
-        public FootballForm()
+        public ProtocolForm()
         {
             InitializeComponent();
 

@@ -56,11 +56,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="FootballPlayerComboItem.cs" />
-    <Compile Include="FootballForm.cs">
+    <Compile Include="Game.cs" />
+    <Compile Include="ProtocolForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FootballForm.Designer.cs">
-      <DependentUpon>FootballForm.cs</DependentUpon>
+    <Compile Include="ProtocolForm.Designer.cs">
+      <DependentUpon>ProtocolForm.cs</DependentUpon>
     </Compile>
     <Compile Include="FootballPlayer.cs" />
     <Compile Include="FootballTeam.cs" />
@@ -74,8 +75,8 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UserInterface.cs" />
-    <EmbeddedResource Include="FootballForm.resx">
-      <DependentUpon>FootballForm.cs</DependentUpon>
+    <EmbeddedResource Include="ProtocolForm.resx">
+      <DependentUpon>ProtocolForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
@@ -105,7 +106,7 @@
   <ItemGroup>
     <Content Include="Data\FootballPlayer.txt" />
     <Content Include="Data\FootballTeam.txt" />
-    <Content Include="Data\Protocol.txt" />
+    <Content Include="Data\Game.txt" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup Condition="$(VisualStudioVersion) == '15.0'">

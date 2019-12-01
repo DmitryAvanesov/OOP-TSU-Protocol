@@ -22,6 +22,7 @@ namespace OOP_TSU_Protocol
             _location = data[1];
 
             TeamPlayers = new List<FootballPlayer>();
+            AddPlayers();
         }
 
         public void AddPlayers()

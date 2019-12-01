@@ -1,6 +1,6 @@
 ﻿namespace OOP_TSU_Protocol
 {
-    partial class FootballForm
+    partial class ProtocolForm
     {
         /// <summary>
         /// Required designer variable.
