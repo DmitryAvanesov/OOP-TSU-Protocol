@@ -14,26 +14,31 @@ namespace OOP_TSU_Protocol
             [Description("Red card")] RedCard
         };
 
-        private ComboBox _homeTeamInput;
-        private ComboBox _guestTeamInput;
-        private DateTimePicker _dateInput;
-        private NumericUpDown _minuteInput;
-        private ComboBox _eventTypeInput;
-        private ComboBox _playerInput;
+        public ComboBox HomeTeamInput { get; private set; }
+        public ComboBox GuestTeamInput { get; private set; }
+        public DateTimePicker DateInput { get; private set; }
+        public NumericUpDown MinuteInput { get; private set; }
+        public ComboBox EventTypeInput { get; private set; }
+        public ComboBox PlayerInput { get; private set; }
+        private Button _addEventButton;
 
         private IList<FootballTeamComboItem> _teamComboItems;
         private IList<FootballPlayerComboItem> _playerComboItems;
         private IList<FootballEventType> _eventComboItems;
 
-        public UserInterface(ComboBox newHomeTeamInput, ComboBox newGuestTeamInput, DateTimePicker newDateInput,
-        NumericUpDown newMinuteInput, ComboBox newEventTypeInput, ComboBox newPlayerInput)
+        public Database CurrentDatabase { get; set; }
+
+        public UserInterface(ComboBox newHomeTeamInput, ComboBox newGuestTeamInput,
+            DateTimePicker newDateInput, NumericUpDown newMinuteInput,
+            ComboBox newEventTypeInput, ComboBox newPlayerInput, Button newAddEventButton)
         {
-            _homeTeamInput = newHomeTeamInput;
-            _guestTeamInput = newGuestTeamInput;
-            _dateInput = newDateInput;
-            _minuteInput = newMinuteInput;
-            _eventTypeInput = newEventTypeInput;
-            _playerInput = newPlayerInput;
+            HomeTeamInput = newHomeTeamInput;
+            GuestTeamInput = newGuestTeamInput;
+            DateInput = newDateInput;
+            MinuteInput = newMinuteInput;
+            EventTypeInput = newEventTypeInput;
+            PlayerInput = newPlayerInput;
+            _addEventButton = newAddEventButton;
 
             _teamComboItems = new List<FootballTeamComboItem>();
             _playerComboItems = new List<FootballPlayerComboItem>();
@@ -49,7 +54,7 @@ namespace OOP_TSU_Protocol
                 _eventComboItems.Add(type);
             }
 
-            _eventTypeInput.Items.AddRange(_eventComboItems.Cast<object>().ToArray());
+            EventTypeInput.Items.AddRange(_eventComboItems.Cast<object>().ToArray());
         }
 
         public void AddTeamComboItem(FootballTeam currentTeam)
@@ -59,8 +64,8 @@ namespace OOP_TSU_Protocol
 
         public void AddTeamComboItemsToComboBox()
         {
-            _homeTeamInput.Items.AddRange(_teamComboItems.Cast<object>().ToArray());
-            _guestTeamInput.Items.AddRange(_teamComboItems.Cast<object>().ToArray());
+            HomeTeamInput.Items.AddRange(_teamComboItems.Cast<object>().ToArray());
+            GuestTeamInput.Items.AddRange(_teamComboItems.Cast<object>().ToArray());
         }
 
         public void OnTeamInputIndexChange(ComboBox thisTeamInput, ComboBox otherTeamInput)
@@ -73,7 +78,7 @@ namespace OOP_TSU_Protocol
                 _playerComboItems.Add(new FootballPlayerComboItem(player.Name, player));
             }
 
-            _playerInput.Items.AddRange(_playerComboItems.Cast<object>().ToArray());
+            PlayerInput.Items.AddRange(_playerComboItems.Cast<object>().ToArray());
             _playerComboItems.Clear();
 
             if (!otherTeamInput.Enabled)
@@ -88,10 +93,13 @@ namespace OOP_TSU_Protocol
 
         private void EnableInput()
         {
-            _dateInput.Enabled = true;
-            _minuteInput.Enabled = true;
-            _eventTypeInput.Enabled = true;
-            _playerInput.Enabled = true;
+            DateInput.Enabled = false;
+            MinuteInput.Enabled = true;
+            EventTypeInput.Enabled = true;
+            PlayerInput.Enabled = true;
+            _addEventButton.Enabled = true;
+
+            CurrentDatabase.InsertGame();
         }
     }
 }

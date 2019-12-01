@@ -9,15 +9,20 @@ namespace OOP_TSU_Protocol
     {
         string PathToFootballTeamTXT = @"\..\..\Data\FootballTeam.txt";
 
-        UserInterface userInterface;
+        private UserInterface _userInterface;
+        private Database _database;
         private IList<FootballTeam> _teams;
 
         public ProtocolForm()
         {
             InitializeComponent();
 
-            userInterface = new UserInterface(HomeTeamInput, GuestTeamInput, DateInput, MinuteInput, EventTypeInput, PlayerInput);
+            _userInterface = new UserInterface(HomeTeamInput, GuestTeamInput, DateInput,
+                MinuteInput, EventTypeInput, PlayerInput, AddEventButton);
+            _database = new Database(_userInterface);
+            _userInterface.CurrentDatabase = _database;
             _teams = new List<FootballTeam>();
+
             AddTeams();
         }
 
@@ -29,20 +34,25 @@ namespace OOP_TSU_Protocol
             {
                 currentTeam = new FootballTeam(line.Split(';'));
                 _teams.Add(currentTeam);
-                userInterface.AddTeamComboItem(currentTeam);
+                _userInterface.AddTeamComboItem(currentTeam);
             }
 
-            userInterface.AddTeamComboItemsToComboBox();
+            _userInterface.AddTeamComboItemsToComboBox();
         }
 
         private void HomeTeamInput_SelectedIndexChanged(object sender, EventArgs e)
         {
-            userInterface.OnTeamInputIndexChange(HomeTeamInput, GuestTeamInput);
+            _userInterface.OnTeamInputIndexChange(HomeTeamInput, GuestTeamInput);
         }
 
         private void GuestTeamInput_SelectedIndexChanged(object sender, EventArgs e)
         {
-            userInterface.OnTeamInputIndexChange(GuestTeamInput, HomeTeamInput);
+            _userInterface.OnTeamInputIndexChange(GuestTeamInput, HomeTeamInput);
+        }
+
+        private void AddEventButton_Click(object sender, EventArgs e)
+        {
+            _database.InsertEvent();
         }
     }
 }

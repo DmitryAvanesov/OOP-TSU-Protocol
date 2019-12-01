@@ -1,4 +1,4 @@
-﻿0;10;Mesut Özil
-0;19;Nicolas Pépé
-2;5;Nathan Aké
-2;13;Callum Wilson
+﻿1;1;10;Mesut Özil
+2;1;19;Nicolas Pépé
+3;3;5;Nathan Aké
+4;3;13;Callum Wilson

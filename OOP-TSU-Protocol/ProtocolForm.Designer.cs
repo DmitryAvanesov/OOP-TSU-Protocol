@@ -41,6 +41,7 @@
             this.GuestTeamInput = new System.Windows.Forms.ComboBox();
             this.PlayerInput = new System.Windows.Forms.ComboBox();
             this.PlayerLabel = new System.Windows.Forms.Label();
+            this.AddEventButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.MinuteInput)).BeginInit();
             this.SuspendLayout();
             // 
@@ -48,7 +49,7 @@
             // 
             this.MinuteInput.Enabled = false;
             this.MinuteInput.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.MinuteInput.Location = new System.Drawing.Point(20, 313);
+            this.MinuteInput.Location = new System.Drawing.Point(20, 386);
             this.MinuteInput.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.MinuteInput.Maximum = new decimal(new int[] {
             90,
@@ -73,7 +74,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label1.Location = new System.Drawing.Point(12, 263);
+            this.label1.Location = new System.Drawing.Point(12, 336);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(139, 46);
             this.label1.TabIndex = 1;
@@ -83,7 +84,7 @@
             // 
             this.EventTypeLabel.AutoSize = true;
             this.EventTypeLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.EventTypeLabel.Location = new System.Drawing.Point(199, 263);
+            this.EventTypeLabel.Location = new System.Drawing.Point(199, 336);
             this.EventTypeLabel.Name = "EventTypeLabel";
             this.EventTypeLabel.Size = new System.Drawing.Size(207, 46);
             this.EventTypeLabel.TabIndex = 2;
@@ -93,7 +94,7 @@
             // 
             this.EventTypeInput.Enabled = false;
             this.EventTypeInput.FormattingEnabled = true;
-            this.EventTypeInput.Location = new System.Drawing.Point(207, 325);
+            this.EventTypeInput.Location = new System.Drawing.Point(207, 398);
             this.EventTypeInput.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.EventTypeInput.MaxDropDownItems = 100;
             this.EventTypeInput.Name = "EventTypeInput";
@@ -115,7 +116,7 @@
             // 
             this.DateLabel.AutoSize = true;
             this.DateLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.DateLabel.Location = new System.Drawing.Point(15, 137);
+            this.DateLabel.Location = new System.Drawing.Point(12, 37);
             this.DateLabel.Name = "DateLabel";
             this.DateLabel.Size = new System.Drawing.Size(104, 46);
             this.DateLabel.TabIndex = 5;
@@ -123,8 +124,7 @@
             // 
             // DateInput
             // 
-            this.DateInput.Enabled = false;
-            this.DateInput.Location = new System.Drawing.Point(23, 187);
+            this.DateInput.Location = new System.Drawing.Point(20, 87);
             this.DateInput.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.DateInput.Name = "DateInput";
             this.DateInput.Size = new System.Drawing.Size(183, 22);
@@ -134,7 +134,7 @@
             // 
             this.HomeTeamLabel.AutoSize = true;
             this.HomeTeamLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.HomeTeamLabel.Location = new System.Drawing.Point(12, 9);
+            this.HomeTeamLabel.Location = new System.Drawing.Point(12, 146);
             this.HomeTeamLabel.Name = "HomeTeamLabel";
             this.HomeTeamLabel.Size = new System.Drawing.Size(226, 46);
             this.HomeTeamLabel.TabIndex = 7;
@@ -144,7 +144,7 @@
             // 
             this.GuestTeamLabel.AutoSize = true;
             this.GuestTeamLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.GuestTeamLabel.Location = new System.Drawing.Point(244, 9);
+            this.GuestTeamLabel.Location = new System.Drawing.Point(244, 146);
             this.GuestTeamLabel.Name = "GuestTeamLabel";
             this.GuestTeamLabel.Size = new System.Drawing.Size(225, 46);
             this.GuestTeamLabel.TabIndex = 8;
@@ -153,7 +153,7 @@
             // HomeTeamInput
             // 
             this.HomeTeamInput.FormattingEnabled = true;
-            this.HomeTeamInput.Location = new System.Drawing.Point(20, 59);
+            this.HomeTeamInput.Location = new System.Drawing.Point(20, 196);
             this.HomeTeamInput.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.HomeTeamInput.Name = "HomeTeamInput";
             this.HomeTeamInput.Size = new System.Drawing.Size(217, 24);
@@ -163,7 +163,7 @@
             // GuestTeamInput
             // 
             this.GuestTeamInput.FormattingEnabled = true;
-            this.GuestTeamInput.Location = new System.Drawing.Point(252, 59);
+            this.GuestTeamInput.Location = new System.Drawing.Point(252, 196);
             this.GuestTeamInput.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.GuestTeamInput.Name = "GuestTeamInput";
             this.GuestTeamInput.Size = new System.Drawing.Size(217, 24);
@@ -174,7 +174,7 @@
             // 
             this.PlayerInput.Enabled = false;
             this.PlayerInput.FormattingEnabled = true;
-            this.PlayerInput.Location = new System.Drawing.Point(20, 459);
+            this.PlayerInput.Location = new System.Drawing.Point(20, 532);
             this.PlayerInput.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.PlayerInput.Name = "PlayerInput";
             this.PlayerInput.Size = new System.Drawing.Size(199, 24);
@@ -184,17 +184,30 @@
             // 
             this.PlayerLabel.AutoSize = true;
             this.PlayerLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.PlayerLabel.Location = new System.Drawing.Point(12, 398);
+            this.PlayerLabel.Location = new System.Drawing.Point(12, 471);
             this.PlayerLabel.Name = "PlayerLabel";
             this.PlayerLabel.Size = new System.Drawing.Size(133, 46);
             this.PlayerLabel.TabIndex = 11;
             this.PlayerLabel.Text = "Player";
             // 
-            // FootballForm
+            // AddEventButton
+            // 
+            this.AddEventButton.Enabled = false;
+            this.AddEventButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.AddEventButton.Location = new System.Drawing.Point(12, 598);
+            this.AddEventButton.Name = "AddEventButton";
+            this.AddEventButton.Size = new System.Drawing.Size(139, 42);
+            this.AddEventButton.TabIndex = 13;
+            this.AddEventButton.Text = "Add event";
+            this.AddEventButton.UseVisualStyleBackColor = true;
+            this.AddEventButton.Click += new System.EventHandler(this.AddEventButton_Click);
+            // 
+            // ProtocolForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1581, 853);
+            this.Controls.Add(this.AddEventButton);
             this.Controls.Add(this.PlayerInput);
             this.Controls.Add(this.PlayerLabel);
             this.Controls.Add(this.GuestTeamInput);
@@ -209,7 +222,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.MinuteInput);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.Name = "FootballForm";
+            this.Name = "ProtocolForm";
             this.Text = "Football";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             ((System.ComponentModel.ISupportInitialize)(this.MinuteInput)).EndInit();
@@ -233,5 +246,6 @@
         private System.Windows.Forms.ComboBox GuestTeamInput;
         private System.Windows.Forms.ComboBox PlayerInput;
         private System.Windows.Forms.Label PlayerLabel;
+        private System.Windows.Forms.Button AddEventButton;
     }
 }

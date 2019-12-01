@@ -9,12 +9,12 @@ namespace OOP_TSU_Protocol
 
         public IList<FootballPlayer> TeamPlayers;
         public string Name { get; private set; }
-        private int _id;
+        public int Id { get; private set; }
         private string _location;
 
         public FootballTeam(string[] data)
         {
-            _id = int.Parse(data[0]);
+            Id = int.Parse(data[0]);
             Name = data[1];
             _location = data[2];
 
@@ -28,7 +28,7 @@ namespace OOP_TSU_Protocol
             {
                 int currentTeamId = int.Parse(line.Split(';')[0]);
 
-                if (currentTeamId == _id)
+                if (currentTeamId == Id)
                 {
                     TeamPlayers.Add(new FootballPlayer(line.Split(';')));
                 }
