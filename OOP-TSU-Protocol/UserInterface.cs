@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows.Forms;
 
 namespace OOP_TSU_Protocol
 {
-    class UserInterface
+    class UserInterface<T1, T2>
+        where T1 : Team
+        where T2 : Player
     {
         public enum FootballEventType {
             [Description("Goal")] Goal,
@@ -22,11 +25,11 @@ namespace OOP_TSU_Protocol
         public ComboBox PlayerInput { get; private set; }
         private Button _addEventButton;
 
-        private IList<FootballTeamComboItem> _teamComboItems;
-        private IList<FootballPlayerComboItem> _playerComboItems;
-        private IList<FootballEventType> _eventComboItems;
+        private ICollection<ComboItem<T1>> _teamComboItems;
+        private ICollection<ComboItem<T2>> _playerComboItems;
+        private ICollection<FootballEventType> _eventComboItems;
 
-        public Database CurrentDatabase { get; set; }
+        public Database<T1, T2> CurrentDatabase { get; set; }
 
         public UserInterface(ComboBox newHomeTeamInput, ComboBox newGuestTeamInput,
             DateTimePicker newDateInput, NumericUpDown newMinuteInput,
@@ -40,8 +43,8 @@ namespace OOP_TSU_Protocol
             PlayerInput = newPlayerInput;
             _addEventButton = newAddEventButton;
 
-            _teamComboItems = new List<FootballTeamComboItem>();
-            _playerComboItems = new List<FootballPlayerComboItem>();
+            _teamComboItems = new List<ComboItem<T1>>();
+            _playerComboItems = new List<ComboItem<T2>>();
             _eventComboItems = new List<FootballEventType>();
 
             AddEventTypeItems();
@@ -57,9 +60,9 @@ namespace OOP_TSU_Protocol
             EventTypeInput.Items.AddRange(_eventComboItems.Cast<object>().ToArray());
         }
 
-        public void AddTeamComboItem(FootballTeam currentTeam)
+        public void AddTeamComboItem(T1 currentTeam)
         {
-            _teamComboItems.Add(new FootballTeamComboItem(currentTeam.Name, currentTeam));
+            _teamComboItems.Add(new ComboItem<T1>(currentTeam.Name, currentTeam));
         }
 
         public void AddTeamComboItemsToComboBox()
@@ -71,11 +74,11 @@ namespace OOP_TSU_Protocol
         public void OnTeamInputIndexChange(ComboBox thisTeamInput, ComboBox otherTeamInput)
         {
             thisTeamInput.Enabled = false;
-            var selectedItem = (FootballTeamComboItem)thisTeamInput.SelectedItem;
+            var selectedItem = (ComboItem<T1>)thisTeamInput.SelectedItem;
 
-            foreach (FootballPlayer player in selectedItem.Team.TeamPlayers)
+            foreach (T2 player in selectedItem.Object.TeamPlayers)
             {
-                _playerComboItems.Add(new FootballPlayerComboItem(player.Name, player));
+                _playerComboItems.Add(new ComboItem<T2>(player.Name, player));
             }
 
             PlayerInput.Items.AddRange(_playerComboItems.Cast<object>().ToArray());

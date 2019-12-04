@@ -1,18 +1,10 @@
 ﻿namespace OOP_TSU_Protocol
 {
-    class FootballPlayer
+    public class FootballPlayer : Player
     {
-        public int Id { get; private set; }
-        public string Team { get; private set; }
-        public string Number { get; private set; }
-        public string Name { get; private set; }
-
-        public FootballPlayer(string[] data)
+        public FootballPlayer(string[] data) : base(data)
         {
-            Id = int.Parse(data[0]);
-            Team = data[1];
-            Number = data[2];
-            Name = data[3];
+
         }
     }
 }

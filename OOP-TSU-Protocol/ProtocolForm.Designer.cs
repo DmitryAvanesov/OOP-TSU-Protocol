@@ -1,6 +1,6 @@
 ﻿namespace OOP_TSU_Protocol
 {
-    partial class ProtocolForm
+    partial class ProtocolForm<T1, T2>
     {
         /// <summary>
         /// Required designer variable.

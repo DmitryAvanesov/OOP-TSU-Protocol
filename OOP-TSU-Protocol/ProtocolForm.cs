@@ -5,37 +5,32 @@ using System.Windows.Forms;
 
 namespace OOP_TSU_Protocol
 {
-    public partial class ProtocolForm : Form
+    public partial class ProtocolForm<T1, T2> : Form
+        where T1 : Team
+        where T2 : Player
     {
-        string PathToFootballTeamTXT = @"\..\..\Data\FootballTeam.txt";
-
-        private UserInterface _userInterface;
-        private Database _database;
-        private IList<FootballTeam> _teams;
+        private UserInterface<T1, T2> _userInterface;
+        private Database<T1, T2> _database;
+        private ICollection<T1> _teams;
 
         public ProtocolForm()
         {
             InitializeComponent();
 
-            _userInterface = new UserInterface(HomeTeamInput, GuestTeamInput, DateInput,
+            _userInterface = new UserInterface<T1, T2>(HomeTeamInput, GuestTeamInput, DateInput,
                 MinuteInput, EventTypeInput, PlayerInput, AddEventButton);
-            _database = new Database(_userInterface);
+            _database = new Database<T1, T2>(_userInterface);
             _userInterface.CurrentDatabase = _database;
-            _teams = new List<FootballTeam>();
+            _teams = new List<T1>();
 
             AddTeams();
         }
 
         private void AddTeams()
         {
-            FootballTeam currentTeam;
+            T1 currentTeam;
 
-            foreach (string line in File.ReadAllLines(Directory.GetCurrentDirectory() + PathToFootballTeamTXT))
-            {
-                currentTeam = new FootballTeam(line.Split(';'));
-                _teams.Add(currentTeam);
-                _userInterface.AddTeamComboItem(currentTeam);
-            }
+            
 
             _userInterface.AddTeamComboItemsToComboBox();
         }
