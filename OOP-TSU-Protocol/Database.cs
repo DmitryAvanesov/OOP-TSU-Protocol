@@ -1,13 +1,12 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
-using System.Reflection;
 
 namespace OOP_TSU_Protocol
 {
     public class Database<T1, T2>
         where T1 : Team, new()
-        where T2 : Player
+        where T2 : Player, new()
     {
         private UserInterface<T1, T2> _userInterface;
 
@@ -75,23 +74,26 @@ namespace OOP_TSU_Protocol
             return playerData;
         }
 
-        public void InsertGame()
+        public void InsertGame(Game<T1, T2> currentGame)
         {
             _conDatabase.Open();
 
             string query = $"INSERT INTO game VALUES" +
                 $"(NULL," +
                 $"{Team.SportId}," +
-                $"'{_userInterface.DateInput.Value}'," +
-                $"{((ComboItem<T1>)_userInterface.HomeTeamInput.SelectedItem).Object.Id}," +
-                $"{((ComboItem<T1>)_userInterface.GuestTeamInput.SelectedItem).Object.Id});";
+                $"'{currentGame.Date}'," +
+                $"{currentGame.HomeTeam.Id}," +
+                $"{currentGame.GuestTeam.Id}," +
+                $"{currentGame.HomeTeamScore}," +
+                $"{currentGame.GuestTeamScore});";
+
             var cmdDatabase = new MySqlCommand(query, _conDatabase);
             _reader = cmdDatabase.ExecuteReader();
 
             _conDatabase.Close();
         }
 
-        public void InsertEvent()
+        public void InsertEvent(Event<T1, T2> currentEvent)
         {
             _conDatabase.Open();
 
@@ -104,9 +106,10 @@ namespace OOP_TSU_Protocol
 
             query = $"INSERT INTO event VALUES" +
                 $"({currentGameId}," +
-                $"{decimal.ToInt32(_userInterface.MinuteInput.Value)}," +
-                $"'{_userInterface.EventTypeInput.SelectedItem.ToString()}'," +
-                $"{((ComboItem<T2>)_userInterface.PlayerInput.SelectedItem).Object.Id});";
+                $"{currentEvent.Minute}," +
+                $"'{currentEvent.Type}'," +
+                $"{currentEvent.Player.Id});";
+
             cmdDatabase = new MySqlCommand(query, _conDatabase);
             _reader = cmdDatabase.ExecuteReader();
 

@@ -35,7 +35,7 @@ namespace OOP_TSU_Protocol
             foreach (var currentPlayerData in data)
             {
                 currentPlayer = new T2();
-                currentPlayer.InitializePlayer(currentPlayerData);
+                currentPlayer.InitializePlayer(currentPlayerData, this);
                 TeamPlayers.Add(currentPlayer);
             }
         }

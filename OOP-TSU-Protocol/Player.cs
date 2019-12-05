@@ -9,16 +9,18 @@ namespace OOP_TSU_Protocol
         public int Number { get; private set; }
         public string Position { get; private set; }
         public string Nationality { get; private set; }
-        public string Team { get; private set; }
+        public Team Team { get; private set; }
 
-        public virtual void InitializePlayer(List<string> data)
+        public virtual void InitializePlayer(List<string> data, Team newTeam)
         {
             Id = int.Parse(data[0]);
             Name = data[2];
             Number = int.Parse(data[3]);
             Position = data[4];
             Nationality = data[5];
-            Team = data[6];  
+            Team = newTeam;
         }
+
+        public abstract void Score(int score = 1);
     }
 }

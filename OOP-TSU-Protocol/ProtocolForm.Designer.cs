@@ -32,7 +32,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.EventTypeLabel = new System.Windows.Forms.Label();
             this.EventTypeInput = new System.Windows.Forms.ComboBox();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.EventsPanel = new System.Windows.Forms.Panel();
             this.DateLabel = new System.Windows.Forms.Label();
             this.DateInput = new System.Windows.Forms.DateTimePicker();
             this.HomeTeamLabel = new System.Windows.Forms.Label();
@@ -42,6 +42,7 @@
             this.PlayerInput = new System.Windows.Forms.ComboBox();
             this.PlayerLabel = new System.Windows.Forms.Label();
             this.AddEventButton = new System.Windows.Forms.Button();
+            this.SaveProtocolButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.MinuteInput)).BeginInit();
             this.SuspendLayout();
             // 
@@ -101,16 +102,16 @@
             this.EventTypeInput.Size = new System.Drawing.Size(199, 24);
             this.EventTypeInput.TabIndex = 3;
             // 
-            // panel1
+            // EventsPanel
             // 
-            this.panel1.AllowDrop = true;
-            this.panel1.BackColor = System.Drawing.Color.Gainsboro;
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel1.Location = new System.Drawing.Point(781, 0);
-            this.panel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(800, 853);
-            this.panel1.TabIndex = 4;
+            this.EventsPanel.AllowDrop = true;
+            this.EventsPanel.BackColor = System.Drawing.Color.Gainsboro;
+            this.EventsPanel.Dock = System.Windows.Forms.DockStyle.Right;
+            this.EventsPanel.Location = new System.Drawing.Point(781, 0);
+            this.EventsPanel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.EventsPanel.Name = "EventsPanel";
+            this.EventsPanel.Size = new System.Drawing.Size(800, 853);
+            this.EventsPanel.TabIndex = 4;
             // 
             // DateLabel
             // 
@@ -203,11 +204,25 @@
             this.AddEventButton.UseVisualStyleBackColor = true;
             this.AddEventButton.Click += new System.EventHandler(this.AddEventButton_Click);
             // 
+            // SaveProtocolButton
+            // 
+            this.SaveProtocolButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.SaveProtocolButton.Enabled = false;
+            this.SaveProtocolButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.SaveProtocolButton.Location = new System.Drawing.Point(12, 799);
+            this.SaveProtocolButton.Name = "SaveProtocolButton";
+            this.SaveProtocolButton.Size = new System.Drawing.Size(207, 42);
+            this.SaveProtocolButton.TabIndex = 14;
+            this.SaveProtocolButton.Text = "Save protocol";
+            this.SaveProtocolButton.UseVisualStyleBackColor = false;
+            this.SaveProtocolButton.Click += new System.EventHandler(this.SaveProtocolButton_Click);
+            // 
             // ProtocolForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1581, 853);
+            this.Controls.Add(this.SaveProtocolButton);
             this.Controls.Add(this.AddEventButton);
             this.Controls.Add(this.PlayerInput);
             this.Controls.Add(this.PlayerLabel);
@@ -217,7 +232,7 @@
             this.Controls.Add(this.HomeTeamLabel);
             this.Controls.Add(this.DateInput);
             this.Controls.Add(this.DateLabel);
-            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.EventsPanel);
             this.Controls.Add(this.EventTypeInput);
             this.Controls.Add(this.EventTypeLabel);
             this.Controls.Add(this.label1);
@@ -238,7 +253,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label EventTypeLabel;
         private System.Windows.Forms.ComboBox EventTypeInput;
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel EventsPanel;
         private System.Windows.Forms.Label DateLabel;
         private System.Windows.Forms.DateTimePicker DateInput;
         private System.Windows.Forms.Label HomeTeamLabel;
@@ -248,5 +263,6 @@
         private System.Windows.Forms.ComboBox PlayerInput;
         private System.Windows.Forms.Label PlayerLabel;
         private System.Windows.Forms.Button AddEventButton;
+        private System.Windows.Forms.Button SaveProtocolButton;
     }
 }
