@@ -6,8 +6,8 @@ using System.Windows.Forms;
 namespace OOP_TSU_Protocol
 {
     public partial class ProtocolForm<T1, T2> : Form
-        where T1 : Team
-        where T2 : Player
+        where T1 : Team, new()
+        where T2 : Player, new()
     {
         private UserInterface<T1, T2> _userInterface;
         private Database<T1, T2> _database;
@@ -28,9 +28,16 @@ namespace OOP_TSU_Protocol
 
         private void AddTeams()
         {
-            T1 currentTeam;
-
+            T1 currentTeam = new T1();
+            var data = _database.SelectTeams();
             
+            foreach (var currentTeamData in data)
+            {
+                currentTeam.InitializeTeam<T1, T2>(currentTeamData, _userInterface, _database);
+                _teams.Add(currentTeam);
+                _userInterface.AddTeamComboItem(currentTeam);
+                currentTeam = new T1();
+            }
 
             _userInterface.AddTeamComboItemsToComboBox();
         }

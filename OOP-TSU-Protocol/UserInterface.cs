@@ -7,8 +7,8 @@ using System.Windows.Forms;
 
 namespace OOP_TSU_Protocol
 {
-    class UserInterface<T1, T2>
-        where T1 : Team
+    public class UserInterface<T1, T2>
+        where T1 : Team, new()
         where T2 : Player
     {
         public enum FootballEventType {
@@ -69,6 +69,16 @@ namespace OOP_TSU_Protocol
         {
             HomeTeamInput.Items.AddRange(_teamComboItems.Cast<object>().ToArray());
             GuestTeamInput.Items.AddRange(_teamComboItems.Cast<object>().ToArray());
+        }
+
+        public void AddPlayerComboItem(T2 currentPlayer)
+        {
+            _playerComboItems.Add(new ComboItem<T2>(currentPlayer.Name, currentPlayer));
+        }
+
+        public void AddPlayerComboItemsToComboBox()
+        {
+            PlayerInput.Items.AddRange(_playerComboItems.Cast<object>().ToArray());
         }
 
         public void OnTeamInputIndexChange(ComboBox thisTeamInput, ComboBox otherTeamInput)

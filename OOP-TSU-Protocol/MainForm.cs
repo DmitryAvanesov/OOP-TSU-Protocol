@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Data.SqlClient;
 using System.Windows.Forms;
-using System.Linq;
 
 namespace OOP_TSU_Protocol
 {
