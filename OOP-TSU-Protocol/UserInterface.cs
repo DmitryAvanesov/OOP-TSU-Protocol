@@ -79,6 +79,7 @@ namespace OOP_TSU_Protocol
         public void AddPlayerComboItemsToComboBox()
         {
             PlayerInput.Items.AddRange(_playerComboItems.Cast<object>().ToArray());
+            _playerComboItems.Clear();
         }
 
         public void OnTeamInputIndexChange(ComboBox thisTeamInput, ComboBox otherTeamInput)

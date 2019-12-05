@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Windows.Forms;
 
 namespace OOP_TSU_Protocol
@@ -33,7 +32,7 @@ namespace OOP_TSU_Protocol
             
             foreach (var currentTeamData in data)
             {
-                currentTeam.InitializeTeam<T1, T2>(currentTeamData, _userInterface, _database);
+                currentTeam.InitializeTeam(currentTeamData, _userInterface, _database);
                 _teams.Add(currentTeam);
                 _userInterface.AddTeamComboItem(currentTeam);
                 currentTeam = new T1();

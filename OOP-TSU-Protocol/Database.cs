@@ -96,7 +96,7 @@ namespace OOP_TSU_Protocol
             _conDatabase.Open();
 
             int currentGameId;
-            string query = $"SELECT game_ID FROM football_game " +
+            string query = $"SELECT game_ID FROM game " +
                 $"ORDER BY game_ID DESC LIMIT 1;";
             var cmdDatabase = new MySqlCommand(query, _conDatabase);
             currentGameId = int.Parse(cmdDatabase.ExecuteScalar().ToString());

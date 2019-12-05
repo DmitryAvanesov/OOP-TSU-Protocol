@@ -176,6 +176,7 @@
             this.PlayerInput.FormattingEnabled = true;
             this.PlayerInput.Location = new System.Drawing.Point(20, 532);
             this.PlayerInput.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.PlayerInput.MaxDropDownItems = 36;
             this.PlayerInput.Name = "PlayerInput";
             this.PlayerInput.Size = new System.Drawing.Size(199, 24);
             this.PlayerInput.TabIndex = 12;

@@ -37,10 +37,7 @@ namespace OOP_TSU_Protocol
                 currentPlayer = new T2();
                 currentPlayer.InitializePlayer(currentPlayerData);
                 TeamPlayers.Add(currentPlayer);
-                userInterface.AddPlayerComboItem(currentPlayer);
             }
-
-            userInterface.AddTeamComboItemsToComboBox();
         }
     }
 }
