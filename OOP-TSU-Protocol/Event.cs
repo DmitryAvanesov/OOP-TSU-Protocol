@@ -14,14 +14,16 @@ namespace OOP_TSU_Protocol
         public int Minute { get; private set; }
         public ProtocolForm<T1, T2>.EventType Type { get; private set; }
         public T2 Player { get; private set; }
+        public T2 Assistant { get; private set; }
 
         public Event(Game<T1, T2> newGame, int newMinute,
-            ProtocolForm<T1, T2>.EventType newType, T2 newPlayer)
+            ProtocolForm<T1, T2>.EventType newType, T2 newPlayer, T2 newAssistant)
         {
             Game = newGame;
             Minute = newMinute;
             Type = newType;
             Player = newPlayer;
+            Assistant = newAssistant;
         }
     }
 }

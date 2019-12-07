@@ -27,8 +27,8 @@ namespace OOP_TSU_Protocol
             InitializeComponent();
 
             _userInterface = new UserInterface<T1, T2>(HomeTeamInput, GuestTeamInput,
-                DateInput, MinuteInput, EventTypeInput, PlayerInput, AddEventButton,
-                SaveProtocolButton, EventsPanel);
+                DateInput, MinuteInput, EventTypeInput, PlayerInput, AssistantLabel,
+                AssistantInput, AddEventButton, SaveProtocolButton, EventsPanel);
             _database = new Database<T1, T2>(_userInterface);
             _userInterface.CurrentDatabase = _database;
             _teams = new List<T1>();
@@ -79,20 +79,36 @@ namespace OOP_TSU_Protocol
                 ((ComboItem<T1>)GuestTeamInput.SelectedItem).Object);
         }
 
+        private void EventTypeInput_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            _userInterface.OnEventTypeInputIndexChange();
+        }
+
         private void AddEventButton_Click(object sender, EventArgs e)
         {
-            _game.AddEvent(_game, int.Parse(MinuteInput.Value.ToString()),
-                (EventType)EventTypeInput.SelectedItem,
-                ((ComboItem<T2>)PlayerInput.SelectedItem).Object);
-
-            _userInterface.WriteEvent(_game.Events.ToArray()[_game.Events.Count - 1]);
-
-            if ((EventType)EventTypeInput.SelectedItem == 0)
+            if (_userInterface.EventTypeInput.SelectedItem != null &&
+                _userInterface.PlayerInput.SelectedItem != null)
             {
-                var player = ((ComboItem<T2>)PlayerInput.SelectedItem).Object;
-              
-                player.Score();
-                _game.IncreaseScore((T1)player.Team);
+                _game.AddEvent(_game, int.Parse(MinuteInput.Value.ToString()),
+                (EventType)EventTypeInput.SelectedItem,
+                ((ComboItem<T2>)PlayerInput.SelectedItem).Object,
+                (AssistantInput.SelectedItem != null) ?
+                ((ComboItem<T2>)AssistantInput.SelectedItem).Object :
+                null);
+
+                _userInterface.WriteEvent(_game.Events.ToArray()[_game.Events.Count - 1]);
+
+                if ((EventType)EventTypeInput.SelectedItem == 0)
+                {
+                    var player = ((ComboItem<T2>)PlayerInput.SelectedItem).Object;
+
+                    player.Score();
+                    _game.IncreaseScore((T1)player.Team);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Fill in all the blanks");
             }
         }
 

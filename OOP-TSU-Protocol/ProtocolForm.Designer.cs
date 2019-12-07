@@ -43,6 +43,8 @@
             this.PlayerLabel = new System.Windows.Forms.Label();
             this.AddEventButton = new System.Windows.Forms.Button();
             this.SaveProtocolButton = new System.Windows.Forms.Button();
+            this.AssistantInput = new System.Windows.Forms.ComboBox();
+            this.AssistantLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.MinuteInput)).BeginInit();
             this.SuspendLayout();
             // 
@@ -101,6 +103,7 @@
             this.EventTypeInput.Name = "EventTypeInput";
             this.EventTypeInput.Size = new System.Drawing.Size(199, 24);
             this.EventTypeInput.TabIndex = 3;
+            this.EventTypeInput.SelectedIndexChanged += new System.EventHandler(this.EventTypeInput_SelectedIndexChanged);
             // 
             // EventsPanel
             // 
@@ -217,11 +220,35 @@
             this.SaveProtocolButton.UseVisualStyleBackColor = false;
             this.SaveProtocolButton.Click += new System.EventHandler(this.SaveProtocolButton_Click);
             // 
+            // AssistantInput
+            // 
+            this.AssistantInput.FormattingEnabled = true;
+            this.AssistantInput.Location = new System.Drawing.Point(252, 532);
+            this.AssistantInput.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.AssistantInput.MaxDropDownItems = 36;
+            this.AssistantInput.Name = "AssistantInput";
+            this.AssistantInput.Size = new System.Drawing.Size(199, 24);
+            this.AssistantInput.TabIndex = 16;
+            this.AssistantInput.Visible = false;
+            // 
+            // AssistantLabel
+            // 
+            this.AssistantLabel.AutoSize = true;
+            this.AssistantLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.AssistantLabel.Location = new System.Drawing.Point(244, 471);
+            this.AssistantLabel.Name = "AssistantLabel";
+            this.AssistantLabel.Size = new System.Drawing.Size(182, 46);
+            this.AssistantLabel.TabIndex = 15;
+            this.AssistantLabel.Text = "Assistant";
+            this.AssistantLabel.Visible = false;
+            // 
             // ProtocolForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1581, 853);
+            this.Controls.Add(this.AssistantInput);
+            this.Controls.Add(this.AssistantLabel);
             this.Controls.Add(this.SaveProtocolButton);
             this.Controls.Add(this.AddEventButton);
             this.Controls.Add(this.PlayerInput);
@@ -264,5 +291,7 @@
         private System.Windows.Forms.Label PlayerLabel;
         private System.Windows.Forms.Button AddEventButton;
         private System.Windows.Forms.Button SaveProtocolButton;
+        private System.Windows.Forms.ComboBox AssistantInput;
+        private System.Windows.Forms.Label AssistantLabel;
     }
 }

@@ -98,17 +98,23 @@ namespace OOP_TSU_Protocol
             _conDatabase.Open();
 
             int currentGameId;
+            string assistant;
+
             string query = $"SELECT game_ID FROM game " +
                 $"ORDER BY game_ID DESC LIMIT 1;";
             var cmdDatabase = new MySqlCommand(query, _conDatabase);
             currentGameId = int.Parse(cmdDatabase.ExecuteScalar().ToString());
-            Console.WriteLine(currentGameId);
+
+            assistant = currentEvent.Assistant != null ?
+                currentEvent.Assistant.Id.ToString() :
+                "null";
 
             query = $"INSERT INTO event VALUES" +
                 $"({currentGameId}," +
                 $"{currentEvent.Minute}," +
                 $"'{currentEvent.Type}'," +
-                $"{currentEvent.Player.Id});";
+                $"{currentEvent.Player.Id}," +
+                $"{assistant});";
 
             cmdDatabase = new MySqlCommand(query, _conDatabase);
             _reader = cmdDatabase.ExecuteReader();

@@ -25,9 +25,9 @@ namespace OOP_TSU_Protocol
         }
 
         public void AddEvent(Game<T1, T2> newGame, int newMinute,
-            ProtocolForm<T1, T2>.EventType newType, T2 newPlayer)
+            ProtocolForm<T1, T2>.EventType newType, T2 newPlayer, T2 newAssistant)
         {
-            Events.Add(new Event<T1, T2>(newGame, newMinute, newType, newPlayer));
+            Events.Add(new Event<T1, T2>(newGame, newMinute, newType, newPlayer, newAssistant));
         }
 
         public void IncreaseScore(T1 team, int score = 1)

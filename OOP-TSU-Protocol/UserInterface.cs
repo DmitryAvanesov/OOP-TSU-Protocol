@@ -18,6 +18,8 @@ namespace OOP_TSU_Protocol
         public NumericUpDown MinuteInput { get; private set; }
         public ComboBox EventTypeInput { get; private set; }
         public ComboBox PlayerInput { get; private set; }
+        public Label AssistantLabel { get; private set; }
+        public ComboBox AssistantInput { get; private set; }
         private Button _addEventButton;
         private Button _saveProtocolButton;
         private Panel _eventsPanel;
@@ -34,8 +36,8 @@ namespace OOP_TSU_Protocol
         private int _fontSize;
 
         public UserInterface(ComboBox newHomeTeamInput, ComboBox newGuestTeamInput,
-            DateTimePicker newDateInput, NumericUpDown newMinuteInput,
-            ComboBox newEventTypeInput, ComboBox newPlayerInput,
+            DateTimePicker newDateInput, NumericUpDown newMinuteInput, ComboBox newEventTypeInput,
+            ComboBox newPlayerInput, Label newAssistantLabel, ComboBox newAssistantInput,
             Button newAddEventButton, Button newSaveProtocolButton, Panel newEventsPanel)
         {
             HomeTeamInput = newHomeTeamInput;
@@ -44,6 +46,8 @@ namespace OOP_TSU_Protocol
             MinuteInput = newMinuteInput;
             EventTypeInput = newEventTypeInput;
             PlayerInput = newPlayerInput;
+            AssistantLabel = newAssistantLabel;
+            AssistantInput = newAssistantInput;
             _addEventButton = newAddEventButton;
             _saveProtocolButton = newSaveProtocolButton;
             _eventsPanel = newEventsPanel;
@@ -88,9 +92,10 @@ namespace OOP_TSU_Protocol
             _playerComboItems.Add(new ComboItem<T2>(currentPlayer.Name, currentPlayer));
         }
 
-        public void AddPlayerComboItemsToComboBox()
+        public void AddPlayerComboItemsToComboBoxes()
         {
             PlayerInput.Items.AddRange(_playerComboItems.Cast<object>().ToArray());
+            AssistantInput.Items.AddRange(_playerComboItems.Cast<object>().ToArray());
             _playerComboItems.Clear();
         }
 
@@ -101,11 +106,10 @@ namespace OOP_TSU_Protocol
 
             foreach (T2 player in selectedItem.Object.TeamPlayers)
             {
-                _playerComboItems.Add(new ComboItem<T2>(player.Name, player));
+                AddPlayerComboItem(player);
             }
 
-            PlayerInput.Items.AddRange(_playerComboItems.Cast<object>().ToArray());
-            _playerComboItems.Clear();
+            AddPlayerComboItemsToComboBoxes();
 
             if (!otherTeamInput.Enabled)
             {
@@ -117,17 +121,49 @@ namespace OOP_TSU_Protocol
             }
         }
 
+        public void OnEventTypeInputIndexChange()
+        {
+            if ((ProtocolForm<T1, T2>.EventType)EventTypeInput.SelectedItem ==
+                ProtocolForm<T1, T2>.EventType.Goal)
+            {
+                AssistantLabel.Visible = true;
+                AssistantInput.Visible = true;
+            }
+            else
+            {
+                AssistantLabel.Visible = false;
+                AssistantInput.Visible = false;
+                AssistantInput.SelectedItem = null;
+            }
+        }
+
         public void WriteEvent(Event<T1, T2> currentEvent)
         {
             Label eventLabel = new Label
             {
                 Text = $"{currentEvent.Minute}'  |  " +
                 $"{currentEvent.Type.ToString()}  |  " +
-                $"{currentEvent.Player.Name}",
+                $"{currentEvent.Player.Name} " +
+                $"({((currentEvent.Assistant != null) ? currentEvent.Assistant.Name : "")})",
 
                 Location = new Point(_leftMargin, _eventLabelPosition),
                 AutoSize = true,
                 Font = new Font("Arial", _fontSize)
+            };
+
+            _eventLabelPosition += _stepMargin;
+            _eventsPanel.Controls.Add(eventLabel);
+
+            eventLabel = new Label
+            {
+                Text = $"{currentEvent.Player.Team.Name}, " +
+                $"#{currentEvent.Player.Number}, " +
+                $"{currentEvent.Player.Position}, " +
+                $"{currentEvent.Player.Nationality}",
+
+                Location = new Point(_leftMargin, _eventLabelPosition),
+                AutoSize = true,
+                Font = new Font("Arial", _fontSize / 2)
             };
 
             _eventLabelPosition += _stepMargin;
