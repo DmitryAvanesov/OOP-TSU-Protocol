@@ -1,4 +1,0 @@
-﻿1;1;10;Mesut Özil
-2;1;19;Nicolas Pépé
-3;3;5;Nathan Aké
-4;3;13;Callum Wilson

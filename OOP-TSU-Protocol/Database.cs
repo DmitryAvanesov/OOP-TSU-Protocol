@@ -43,6 +43,7 @@ namespace OOP_TSU_Protocol
                 currentGame++;
             }
 
+            _reader.Close();
             _conDatabase.Close();
             return gameData;
         }
@@ -70,6 +71,7 @@ namespace OOP_TSU_Protocol
                 currentEvent++;
             }
 
+            _reader.Close();
             _conDatabase.Close();
             return eventData;
         }
@@ -97,6 +99,7 @@ namespace OOP_TSU_Protocol
                 currentTeam++;
             }
 
+            _reader.Close();
             _conDatabase.Close();
             return teamData;
         }
@@ -124,6 +127,7 @@ namespace OOP_TSU_Protocol
                 currentPlayer++;
             }
 
+            _reader.Close();
             _conDatabase.Close();
             return playerData;
         }
@@ -144,6 +148,7 @@ namespace OOP_TSU_Protocol
             var cmdDatabase = new MySqlCommand(query, _conDatabase);
             _reader = cmdDatabase.ExecuteReader();
 
+            _reader.Close();
             _conDatabase.Close();
         }
 
@@ -172,8 +177,69 @@ namespace OOP_TSU_Protocol
 
             cmdDatabase = new MySqlCommand(query, _conDatabase);
             _reader = cmdDatabase.ExecuteReader();
-
+            
+            _reader.Close();
             _conDatabase.Close();
+        }
+
+        public void UpdateData()
+        {
+            _conDatabase.Open();
+
+            UpdateTeamData(((ComboItem<T1>)_userInterface.HomeTeamInput.SelectedItem).Object);
+            UpdateTeamData(((ComboItem<T1>)_userInterface.GuestTeamInput.SelectedItem).Object);
+
+            foreach (var player in
+                ((ComboItem<T1>)_userInterface.HomeTeamInput.SelectedItem).Object.Players)
+            {
+                UpdatePlayerData(player);
+            }
+
+            foreach (var player in
+                ((ComboItem<T1>)_userInterface.GuestTeamInput.SelectedItem).Object.Players)
+            {
+                UpdatePlayerData(player);
+            }
+
+            _reader.Close();
+            _conDatabase.Close();
+        }
+
+        private void UpdateTeamData(T1 team)
+        {
+            string query = $"UPDATE team SET " +
+                $"points = {team.Points} " +
+                $"WHERE team_ID = {team.Id};";
+            var cmdDatabase = new MySqlCommand(query, _conDatabase);
+            _reader = cmdDatabase.ExecuteReader();
+
+            _reader.Close();
+        }
+
+        private void UpdatePlayerData(Player player)
+        {
+            string query = "";
+
+            if (typeof(T2) == typeof(FootballPlayer))
+            {
+                query = $"UPDATE player SET " +
+                $"goals = {((FootballPlayer)player).Goals}, " +
+                $"assists = {((FootballPlayer)player).Assists}, " +
+                $"yellow_cards = {((FootballPlayer)player).YellowCards}, " +
+                $"red_cards = {((FootballPlayer)player).RedCards} " +
+                $"WHERE player_ID = {((FootballPlayer)player).Id};";
+            }
+            else if (typeof(T2) == typeof(BasketballPlayer))
+            {
+                query = $"UPDATE player SET " +
+                $"points = {((BasketballPlayer)player).Points}, " +
+                $"removals = {((BasketballPlayer)player).Removals};";
+            }
+
+            var cmdDatabase = new MySqlCommand(query, _conDatabase);
+            _reader = cmdDatabase.ExecuteReader();
+
+            _reader.Close();
         }
     }
 }

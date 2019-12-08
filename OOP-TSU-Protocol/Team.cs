@@ -8,8 +8,8 @@ namespace OOP_TSU_Protocol
         public static int SportId { get; protected set; }
         public string Name { get; private set; }
         protected string _location;
-        protected int _points;
-        public virtual ICollection<Player> TeamPlayers { get; set; }
+        public int Points { get; private set; }
+        public virtual ICollection<Player> Players { get; set; }
 
         public void InitializeTeam<T1, T2>(List<string> data,
             UserInterface<T1, T2> newUserInterface, Database<T1, T2> newDatabase)
@@ -19,7 +19,7 @@ namespace OOP_TSU_Protocol
             Id = int.Parse(data[0]);
             Name = data[2];
             _location = data[3];
-            _points = int.Parse(data[4]);
+            Points = int.Parse(data[4]);
 
             AddPlayers<T1, T2>(newUserInterface, newDatabase);
         }
@@ -36,7 +36,7 @@ namespace OOP_TSU_Protocol
             {
                 currentPlayer = new T2();
                 currentPlayer.InitializePlayer(currentPlayerData, this);
-                TeamPlayers.Add(currentPlayer);
+                Players.Add(currentPlayer);
             }
         }
     }

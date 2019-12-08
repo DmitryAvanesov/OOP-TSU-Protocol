@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
@@ -13,6 +12,7 @@ namespace OOP_TSU_Protocol
         where T2 : Player, new()
     {
         public ComboBox GameInput { get; private set; }
+        public ComboBox StatsInput { get; private set; }
         public ComboBox HomeTeamInput { get; private set; }
         public ComboBox GuestTeamInput { get; private set; }
         public DateTimePicker DateInput { get; private set; }
@@ -26,6 +26,7 @@ namespace OOP_TSU_Protocol
         private Panel _eventsPanel;
 
         private ICollection<ComboItem<Game<T1, T2>>> _gameComboItems;
+        private ICollection<ProtocolForm<T1, T2>.StatsType> _statsComboItems;
         private ICollection<ComboItem<T1>> _teamComboItems;
         private ICollection<ComboItem<T2>> _playerComboItems;
         private ICollection<ProtocolForm<T1, T2>.EventType> _eventComboItems;
@@ -37,13 +38,14 @@ namespace OOP_TSU_Protocol
         private int _stepMargin;
         private int _fontSize;
 
-        public UserInterface(ComboBox newGameInput, ComboBox newHomeTeamInput,
-            ComboBox newGuestTeamInput, DateTimePicker newDateInput, NumericUpDown newMinuteInput,
-            ComboBox newEventTypeInput, ComboBox newPlayerInput, Label newAssistantLabel,
-            ComboBox newAssistantInput, Button newAddEventButton, Button newSaveProtocolButton,
-            Panel newEventsPanel)
+        public UserInterface(ComboBox newGameInput, ComboBox newStatsInput,
+            ComboBox newHomeTeamInput, ComboBox newGuestTeamInput, DateTimePicker newDateInput,
+            NumericUpDown newMinuteInput, ComboBox newEventTypeInput, ComboBox newPlayerInput,
+            Label newAssistantLabel, ComboBox newAssistantInput, Button newAddEventButton,
+            Button newSaveProtocolButton, Panel newEventsPanel)
         {
             GameInput = newGameInput;
+            StatsInput = newStatsInput;
             HomeTeamInput = newHomeTeamInput;
             GuestTeamInput = newGuestTeamInput;
             DateInput = newDateInput;
@@ -57,6 +59,7 @@ namespace OOP_TSU_Protocol
             _eventsPanel = newEventsPanel;
 
             _gameComboItems = new List<ComboItem<Game<T1, T2>>>();
+            _statsComboItems = new List<ProtocolForm<T1, T2>.StatsType>();
             _teamComboItems = new List<ComboItem<T1>>();
             _playerComboItems = new List<ComboItem<T2>>();
             _eventComboItems = new List<ProtocolForm<T1, T2>.EventType>();
@@ -68,11 +71,24 @@ namespace OOP_TSU_Protocol
             _fontSize = 16;
         }
 
+        public void AddStatsTypeItems(Dictionary<ProtocolForm<T1, T2>.StatsType, Type> statsTypes)
+        {
+            foreach (KeyValuePair<ProtocolForm<T1, T2>.StatsType, Type> type in statsTypes)
+            {
+                if (type.Value == typeof(T2))
+                {
+                    _statsComboItems.Add(type.Key);
+                }
+            }
+
+            StatsInput.Items.AddRange(_statsComboItems.Cast<object>().ToArray());
+        }
+
         public void AddEventTypeItems(Dictionary<ProtocolForm<T1, T2>.EventType, Type> eventTypes)
         {
             foreach (KeyValuePair<ProtocolForm<T1, T2>.EventType, Type> type in eventTypes)
             {
-                if (type.Value == typeof(T1))
+                if (type.Value == typeof(T2))
                 {
                     _eventComboItems.Add(type.Key);
                 }
@@ -131,7 +147,7 @@ namespace OOP_TSU_Protocol
             thisTeamInput.Enabled = false;
             var selectedItem = (ComboItem<T1>)thisTeamInput.SelectedItem;
 
-            foreach (T2 player in selectedItem.Object.TeamPlayers)
+            foreach (T2 player in selectedItem.Object.Players)
             {
                 AddPlayerComboItem(player);
             }
@@ -197,9 +213,128 @@ namespace OOP_TSU_Protocol
             _eventsPanel.Controls.Add(eventLabel);
         }
 
+        public void WriteStats(ICollection<T1> teams)
+        {
+            ICollection<T2> players = new List<T2>();
+            IList<T2> sortedPlayers = new List<T2>();
+            IList<int> values = new List<int>();
+
+            foreach (var currentTeam in teams)
+            {
+                foreach (var currentPlayer in currentTeam.Players)
+                {
+                    players.Add((T2)currentPlayer);
+                }
+            }
+
+            switch ((ProtocolForm<T1, T2>.StatsType)StatsInput.SelectedItem)
+            {
+                case (ProtocolForm<T1, T2>.StatsType.Goals):
+                    {
+                        sortedPlayers = players.OrderByDescending(currentPlayer =>
+                        (currentPlayer as FootballPlayer).Goals).ToList();
+
+                        foreach (var player in sortedPlayers)
+                        {
+                            values.Add((player as FootballPlayer).Goals);
+                        }
+
+                        break;
+                    }
+                case (ProtocolForm<T1, T2>.StatsType.Assists):
+                    {
+                        sortedPlayers = players.OrderByDescending(currentPlayer =>
+                        (currentPlayer as FootballPlayer).Assists).ToList();
+
+                        foreach (var player in sortedPlayers)
+                        {
+                            values.Add((player as FootballPlayer).Assists);
+                        }
+
+                        break;
+                    }
+                case (ProtocolForm<T1, T2>.StatsType.Yellow_cards):
+                    {
+                        sortedPlayers = players.OrderByDescending(currentPlayer =>
+                        (currentPlayer as FootballPlayer).YellowCards).ToList();
+
+                        foreach (var player in sortedPlayers)
+                        {
+                            values.Add((player as FootballPlayer).YellowCards);
+                        }
+
+                        break;
+                    }
+                case (ProtocolForm<T1, T2>.StatsType.Red_cards):
+                    {
+                        sortedPlayers = players.OrderByDescending(currentPlayer =>
+                        (currentPlayer as FootballPlayer).RedCards).ToList();
+
+                        foreach (var player in sortedPlayers)
+                        {
+                            values.Add((player as FootballPlayer).RedCards);
+                        }
+
+                        break;
+                    }
+                case (ProtocolForm<T1, T2>.StatsType.Points):
+                    {
+                        sortedPlayers = players.OrderByDescending(currentPlayer =>
+                        (currentPlayer as BasketballPlayer).Points).ToList();
+                        
+                        foreach (var player in sortedPlayers)
+                        {
+                            values.Add((player as BasketballPlayer).Points);
+                        }
+
+                        break;
+                    }
+                case (ProtocolForm<T1, T2>.StatsType.Removals):
+                    {
+                        sortedPlayers = players.OrderByDescending(currentPlayer =>
+                        (currentPlayer as BasketballPlayer).Removals).ToList();
+
+                        foreach (var player in sortedPlayers)
+                        {
+                            values.Add((player as BasketballPlayer).Removals);
+                        }
+
+                        break;
+                    }
+                default:
+                    break;
+            }
+
+            int count = 1;
+            _eventsPanel.Controls.Clear();
+            _eventLabelPosition = 20;
+
+            for (var i = 0; i < sortedPlayers.Count; i++)
+            {
+                Label eventLabel = new Label
+                {
+                    Text = $"{count}.  {values[i]}  |  " +
+                    $"{sortedPlayers[i].Name}, " +
+                    $"({sortedPlayers[i].Team.Name}, " +
+                    $"#{sortedPlayers[i].Nationality}, " +
+                    $"{sortedPlayers[i].Number}, " +
+                    $"{sortedPlayers[i].Position})",
+
+                    Location = new Point(_leftMargin, _eventLabelPosition),
+                    AutoSize = true,
+                    Font = new Font("Arial", _fontSize - 2)
+                };
+
+                _eventLabelPosition += _stepMargin;
+                _eventsPanel.Controls.Add(eventLabel);
+                count++;
+            }
+        }
+
         private void EnableInput()
         {
             GameInput.Enabled = false;
+            StatsInput.Enabled = false;
             DateInput.Enabled = false;
             MinuteInput.Enabled = true;
             EventTypeInput.Enabled = true;

@@ -29,13 +29,24 @@ namespace OOP_TSU_Protocol
         };
         private Dictionary<EventType, Type> _eventTypes;
 
+        public enum StatsType
+        {
+            Goals,
+            Assists,
+            Yellow_cards,
+            Red_cards,
+            Points,
+            Removals
+        };
+        private Dictionary<StatsType, Type> _statsTypes;
+
         public ProtocolForm(MainForm mainForm)
         {
             InitializeComponent();
 
             _mainForm = mainForm;
 
-            _userInterface = new UserInterface<T1, T2>(GameInput, HomeTeamInput,
+            _userInterface = new UserInterface<T1, T2>(GameInput, StatsInput, HomeTeamInput,
                 GuestTeamInput, DateInput, MinuteInput, EventTypeInput, PlayerInput, AssistantLabel,
                 AssistantInput, AddEventButton, SaveProtocolButton, EventsPanel);
             _database = new Database<T1, T2>(_userInterface);
@@ -45,17 +56,28 @@ namespace OOP_TSU_Protocol
 
             _eventTypes = new Dictionary<EventType, Type>
             {
-                { EventType.Goal, typeof(FootballTeam) },
-                { EventType.Yellow_card, typeof(FootballTeam) },
-                { EventType.Red_card, typeof(FootballTeam) },
-                { EventType.Two_points_shot, typeof(BasketballTeam) },
-                { EventType.Three_points_shot, typeof(BasketballTeam) },
-                { EventType.Removal, typeof(BasketballTeam) }
+                { EventType.Goal, typeof(FootballPlayer) },
+                { EventType.Yellow_card, typeof(FootballPlayer) },
+                { EventType.Red_card, typeof(FootballPlayer) },
+                { EventType.Two_points_shot, typeof(BasketballPlayer) },
+                { EventType.Three_points_shot, typeof(BasketballPlayer) },
+                { EventType.Removal, typeof(BasketballPlayer) }
+            };
+
+            _statsTypes = new Dictionary<StatsType, Type>
+            {
+                { StatsType.Goals, typeof(FootballPlayer) },
+                { StatsType.Assists, typeof(FootballPlayer) },
+                { StatsType.Yellow_cards, typeof(FootballPlayer) },
+                { StatsType.Red_cards, typeof(FootballPlayer) },
+                { StatsType.Points, typeof(BasketballPlayer) },
+                { StatsType.Removals, typeof(BasketballPlayer) }
             };
 
             AddTeams();
             AddGames();
             _userInterface.AddEventTypeItems(_eventTypes);
+            _userInterface.AddStatsTypeItems(_statsTypes);
         }
 
         private void AddGames()
@@ -117,7 +139,7 @@ namespace OOP_TSU_Protocol
                 EventType currentType = (EventType)Enum.Parse
                     (typeof(EventType), currentEventData[2], true);
 
-                foreach (var player in currentGame.HomeTeam.TeamPlayers)
+                foreach (var player in currentGame.HomeTeam.Players)
                 {
                     if (player.Id == int.Parse(currentEventData[3]))
                     {
@@ -131,7 +153,7 @@ namespace OOP_TSU_Protocol
                     }
                 }
 
-                foreach (var player in currentGame.GuestTeam.TeamPlayers)
+                foreach (var player in currentGame.GuestTeam.Players)
                 {
                     if (player.Id == int.Parse(currentEventData[3]))
                     {
@@ -170,6 +192,11 @@ namespace OOP_TSU_Protocol
         private void GameInput_SelectedIndexChanged(object sender, EventArgs e)
         {
             _userInterface.OnGameInputIndexChanged();
+        }
+
+        private void StatsInput_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            _userInterface.WriteStats(_teams);
         }
 
         private void HomeTeamInput_SelectedIndexChanged(object sender, EventArgs e)
@@ -217,13 +244,39 @@ namespace OOP_TSU_Protocol
                 null);
 
                 _userInterface.WriteEvent(_activeGame.Events.ToArray()[_activeGame.Events.Count - 1]);
+                var player = ((ComboItem<T2>)PlayerInput.SelectedItem).Object;
 
-                if ((EventType)EventTypeInput.SelectedItem == 0)
+                if ((EventType)EventTypeInput.SelectedItem == EventType.Goal)
                 {
-                    var player = ((ComboItem<T2>)PlayerInput.SelectedItem).Object;
-
-                    player.Score();
+                    player.IncreaseScore();
+                    if (AssistantInput.SelectedItem != null)
+                    {
+                        (((ComboItem<T2>)AssistantInput.SelectedItem).Object
+                        as FootballPlayer).AddAssist();
+                    }
                     _activeGame.IncreaseScore((T1)player.Team);
+                }
+                else if ((EventType)EventTypeInput.SelectedItem == EventType.Yellow_card)
+                {
+                    (player as FootballPlayer).GetYellowCard();
+                }
+                else if ((EventType)EventTypeInput.SelectedItem == EventType.Red_card)
+                {
+                    (player as FootballPlayer).GetRedCard();
+                }
+                else if ((EventType)EventTypeInput.SelectedItem == EventType.Two_points_shot)
+                {
+                    player.IncreaseScore(2);
+                    _activeGame.IncreaseScore((T1)player.Team, 2);
+                }
+                else if ((EventType)EventTypeInput.SelectedItem == EventType.Three_points_shot)
+                {
+                    player.IncreaseScore(3);
+                    _activeGame.IncreaseScore((T1)player.Team, 3);
+                }
+                else if ((EventType)EventTypeInput.SelectedItem == EventType.Removal)
+                {
+                    (player as BasketballPlayer).GetRemoval();
                 }
             }
             else
@@ -240,6 +293,8 @@ namespace OOP_TSU_Protocol
             {
                 _database.InsertEvent(currentEvent);
             }
+
+            _database.UpdateData();
 
             Hide();
             _mainForm.Show();

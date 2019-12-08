@@ -19,9 +19,24 @@ namespace OOP_TSU_Protocol
             RedCards = int.Parse(data[10]);
         }
 
-        public override void Score(int score)
+        public override void IncreaseScore(int score)
         {
             Goals += score;
+        }
+
+        public void AddAssist()
+        {
+            Assists++;
+        }
+
+        public void GetYellowCard()
+        {
+            YellowCards++;
+        }
+
+        public void GetRedCard()
+        {
+            RedCards++;
         }
     }
 }

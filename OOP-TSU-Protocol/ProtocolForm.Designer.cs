@@ -48,6 +48,8 @@
             this.ViewProtocolLabel = new System.Windows.Forms.Label();
             this.NewProtocolLabel = new System.Windows.Forms.Label();
             this.GameInput = new System.Windows.Forms.ComboBox();
+            this.ViewStatsLabel = new System.Windows.Forms.Label();
+            this.StatsInput = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.MinuteInput)).BeginInit();
             this.SuspendLayout();
             // 
@@ -275,11 +277,33 @@
             this.GameInput.TabIndex = 19;
             this.GameInput.SelectedIndexChanged += new System.EventHandler(this.GameInput_SelectedIndexChanged);
             // 
+            // ViewStatsLabel
+            // 
+            this.ViewStatsLabel.AutoSize = true;
+            this.ViewStatsLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 25.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.ViewStatsLabel.Location = new System.Drawing.Point(315, 9);
+            this.ViewStatsLabel.Name = "ViewStatsLabel";
+            this.ViewStatsLabel.Size = new System.Drawing.Size(234, 52);
+            this.ViewStatsLabel.TabIndex = 20;
+            this.ViewStatsLabel.Text = "View stats:";
+            // 
+            // StatsInput
+            // 
+            this.StatsInput.FormattingEnabled = true;
+            this.StatsInput.Location = new System.Drawing.Point(324, 73);
+            this.StatsInput.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.StatsInput.Name = "StatsInput";
+            this.StatsInput.Size = new System.Drawing.Size(280, 24);
+            this.StatsInput.TabIndex = 21;
+            this.StatsInput.SelectedIndexChanged += new System.EventHandler(this.StatsInput_SelectedIndexChanged);
+            // 
             // ProtocolForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1581, 853);
+            this.Controls.Add(this.StatsInput);
+            this.Controls.Add(this.ViewStatsLabel);
             this.Controls.Add(this.GameInput);
             this.Controls.Add(this.NewProtocolLabel);
             this.Controls.Add(this.ViewProtocolLabel);
@@ -332,5 +356,7 @@
         private System.Windows.Forms.Label ViewProtocolLabel;
         private System.Windows.Forms.Label NewProtocolLabel;
         private System.Windows.Forms.ComboBox GameInput;
+        private System.Windows.Forms.Label ViewStatsLabel;
+        private System.Windows.Forms.ComboBox StatsInput;
     }
 }

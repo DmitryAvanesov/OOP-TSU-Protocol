@@ -21,6 +21,6 @@ namespace OOP_TSU_Protocol
             Team = newTeam;
         }
 
-        public abstract void Score(int score = 1);
+        public abstract void IncreaseScore(int score = 1);
     }
 }

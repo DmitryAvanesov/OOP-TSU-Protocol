@@ -19,9 +19,14 @@ namespace OOP_TSU_Protocol
             Removals = int.Parse(data[12]);
         }
 
-        public override void Score(int score)
+        public override void IncreaseScore(int score)
         {
             Points += score;
+        }
+
+        public void GetRemoval()
+        {
+            Removals++;
         }
     }
 }
