@@ -57,6 +57,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BasketballPlayer.cs" />
+    <Compile Include="BasketballTeam.cs" />
     <Compile Include="Database.cs" />
     <Compile Include="ComboItem.cs" />
     <Compile Include="Event.cs" />

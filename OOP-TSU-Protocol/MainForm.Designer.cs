@@ -73,6 +73,7 @@ namespace OOP_TSU_Protocol
             this.BasketballButton.TabIndex = 2;
             this.BasketballButton.Text = "Basketball";
             this.BasketballButton.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.BasketballButton.Click += new System.EventHandler(this.BasketballButton_Click);
             // 
             // MainForm
             // 
@@ -86,6 +87,7 @@ namespace OOP_TSU_Protocol
             this.Text = "Protocol";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.ResumeLayout(false);
+
         }
 
         #endregion

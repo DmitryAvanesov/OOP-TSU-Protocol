@@ -14,7 +14,15 @@ namespace OOP_TSU_Protocol
         {
             Hide();
 
-            var protocolForm = new ProtocolForm<FootballTeam, FootballPlayer>();
+            var protocolForm = new ProtocolForm<FootballTeam, FootballPlayer>(this);
+            protocolForm.Show();
+        }
+
+        private void BasketballButton_Click(object sender, EventArgs e)
+        {
+            Hide();
+
+            var protocolForm = new ProtocolForm<BasketballTeam, BasketballPlayer>(this);
             protocolForm.Show();
         }
     }

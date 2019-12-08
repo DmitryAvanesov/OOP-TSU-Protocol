@@ -20,6 +20,60 @@ namespace OOP_TSU_Protocol
             _userInterface = newUserInterface;
         }
 
+        public List<List<string>> SelectGames()
+        {
+            _conDatabase.Open();
+
+            string query = $"SELECT * FROM game WHERE sport = {Team.SportId}";
+            MySqlCommand command = new MySqlCommand(query, _conDatabase);
+            _reader = command.ExecuteReader();
+
+            var gameData = new List<List<string>>();
+            int currentGame = 0;
+
+            while (_reader.Read())
+            {
+                gameData.Add(new List<string>());
+
+                for (int i = 0; i < _reader.FieldCount; i++)
+                {
+                    gameData[currentGame].Add(_reader[i].ToString());
+                }
+
+                currentGame++;
+            }
+
+            _conDatabase.Close();
+            return gameData;
+        }
+
+        public List<List<string>> SelectEvents(Game<T1, T2> game)
+        {
+            _conDatabase.Open();
+
+            string query = $"SELECT * FROM event WHERE game = {game.Id}";
+            MySqlCommand command = new MySqlCommand(query, _conDatabase);
+            _reader = command.ExecuteReader();
+
+            var eventData = new List<List<string>>();
+            int currentEvent = 0;
+
+            while (_reader.Read())
+            {
+                eventData.Add(new List<string>());
+
+                for (int i = 0; i < _reader.FieldCount; i++)
+                {
+                    eventData[currentEvent].Add(_reader[i].ToString());
+                }
+
+                currentEvent++;
+            }
+
+            _conDatabase.Close();
+            return eventData;
+        }
+
         public List<List<string>> SelectTeams()
         {
             _conDatabase.Open();

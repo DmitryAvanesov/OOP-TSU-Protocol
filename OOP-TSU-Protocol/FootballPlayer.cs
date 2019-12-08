@@ -13,10 +13,10 @@ namespace OOP_TSU_Protocol
         {
             base.InitializePlayer(data, newTeam);
 
-            Goals = int.Parse(data[6]);
-            Assists = int.Parse(data[7]);
-            YellowCards = int.Parse(data[8]);
-            RedCards = int.Parse(data[9]);
+            Goals = int.Parse(data[7]);
+            Assists = int.Parse(data[8]);
+            YellowCards = int.Parse(data[9]);
+            RedCards = int.Parse(data[10]);
         }
 
         public override void Score(int score)

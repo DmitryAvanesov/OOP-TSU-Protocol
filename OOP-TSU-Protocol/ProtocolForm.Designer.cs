@@ -45,6 +45,9 @@
             this.SaveProtocolButton = new System.Windows.Forms.Button();
             this.AssistantInput = new System.Windows.Forms.ComboBox();
             this.AssistantLabel = new System.Windows.Forms.Label();
+            this.ViewProtocolLabel = new System.Windows.Forms.Label();
+            this.NewProtocolLabel = new System.Windows.Forms.Label();
+            this.GameInput = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.MinuteInput)).BeginInit();
             this.SuspendLayout();
             // 
@@ -52,7 +55,7 @@
             // 
             this.MinuteInput.Enabled = false;
             this.MinuteInput.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.MinuteInput.Location = new System.Drawing.Point(20, 386);
+            this.MinuteInput.Location = new System.Drawing.Point(20, 496);
             this.MinuteInput.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.MinuteInput.Maximum = new decimal(new int[] {
             90,
@@ -77,7 +80,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label1.Location = new System.Drawing.Point(12, 336);
+            this.label1.Location = new System.Drawing.Point(12, 446);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(139, 46);
             this.label1.TabIndex = 1;
@@ -87,7 +90,7 @@
             // 
             this.EventTypeLabel.AutoSize = true;
             this.EventTypeLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.EventTypeLabel.Location = new System.Drawing.Point(199, 336);
+            this.EventTypeLabel.Location = new System.Drawing.Point(199, 446);
             this.EventTypeLabel.Name = "EventTypeLabel";
             this.EventTypeLabel.Size = new System.Drawing.Size(207, 46);
             this.EventTypeLabel.TabIndex = 2;
@@ -97,7 +100,7 @@
             // 
             this.EventTypeInput.Enabled = false;
             this.EventTypeInput.FormattingEnabled = true;
-            this.EventTypeInput.Location = new System.Drawing.Point(207, 398);
+            this.EventTypeInput.Location = new System.Drawing.Point(207, 508);
             this.EventTypeInput.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.EventTypeInput.MaxDropDownItems = 100;
             this.EventTypeInput.Name = "EventTypeInput";
@@ -110,17 +113,17 @@
             this.EventsPanel.AllowDrop = true;
             this.EventsPanel.BackColor = System.Drawing.Color.Gainsboro;
             this.EventsPanel.Dock = System.Windows.Forms.DockStyle.Right;
-            this.EventsPanel.Location = new System.Drawing.Point(781, 0);
+            this.EventsPanel.Location = new System.Drawing.Point(681, 0);
             this.EventsPanel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.EventsPanel.Name = "EventsPanel";
-            this.EventsPanel.Size = new System.Drawing.Size(800, 853);
+            this.EventsPanel.Size = new System.Drawing.Size(900, 853);
             this.EventsPanel.TabIndex = 4;
             // 
             // DateLabel
             // 
             this.DateLabel.AutoSize = true;
             this.DateLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.DateLabel.Location = new System.Drawing.Point(12, 37);
+            this.DateLabel.Location = new System.Drawing.Point(12, 216);
             this.DateLabel.Name = "DateLabel";
             this.DateLabel.Size = new System.Drawing.Size(104, 46);
             this.DateLabel.TabIndex = 5;
@@ -128,7 +131,7 @@
             // 
             // DateInput
             // 
-            this.DateInput.Location = new System.Drawing.Point(20, 87);
+            this.DateInput.Location = new System.Drawing.Point(20, 266);
             this.DateInput.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.DateInput.Name = "DateInput";
             this.DateInput.Size = new System.Drawing.Size(183, 22);
@@ -138,7 +141,7 @@
             // 
             this.HomeTeamLabel.AutoSize = true;
             this.HomeTeamLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.HomeTeamLabel.Location = new System.Drawing.Point(12, 146);
+            this.HomeTeamLabel.Location = new System.Drawing.Point(12, 325);
             this.HomeTeamLabel.Name = "HomeTeamLabel";
             this.HomeTeamLabel.Size = new System.Drawing.Size(226, 46);
             this.HomeTeamLabel.TabIndex = 7;
@@ -148,7 +151,7 @@
             // 
             this.GuestTeamLabel.AutoSize = true;
             this.GuestTeamLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.GuestTeamLabel.Location = new System.Drawing.Point(244, 146);
+            this.GuestTeamLabel.Location = new System.Drawing.Point(244, 325);
             this.GuestTeamLabel.Name = "GuestTeamLabel";
             this.GuestTeamLabel.Size = new System.Drawing.Size(225, 46);
             this.GuestTeamLabel.TabIndex = 8;
@@ -157,7 +160,7 @@
             // HomeTeamInput
             // 
             this.HomeTeamInput.FormattingEnabled = true;
-            this.HomeTeamInput.Location = new System.Drawing.Point(20, 196);
+            this.HomeTeamInput.Location = new System.Drawing.Point(20, 375);
             this.HomeTeamInput.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.HomeTeamInput.Name = "HomeTeamInput";
             this.HomeTeamInput.Size = new System.Drawing.Size(217, 24);
@@ -167,7 +170,7 @@
             // GuestTeamInput
             // 
             this.GuestTeamInput.FormattingEnabled = true;
-            this.GuestTeamInput.Location = new System.Drawing.Point(252, 196);
+            this.GuestTeamInput.Location = new System.Drawing.Point(252, 375);
             this.GuestTeamInput.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.GuestTeamInput.Name = "GuestTeamInput";
             this.GuestTeamInput.Size = new System.Drawing.Size(217, 24);
@@ -178,7 +181,7 @@
             // 
             this.PlayerInput.Enabled = false;
             this.PlayerInput.FormattingEnabled = true;
-            this.PlayerInput.Location = new System.Drawing.Point(20, 532);
+            this.PlayerInput.Location = new System.Drawing.Point(20, 642);
             this.PlayerInput.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.PlayerInput.MaxDropDownItems = 36;
             this.PlayerInput.Name = "PlayerInput";
@@ -189,7 +192,7 @@
             // 
             this.PlayerLabel.AutoSize = true;
             this.PlayerLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.PlayerLabel.Location = new System.Drawing.Point(12, 471);
+            this.PlayerLabel.Location = new System.Drawing.Point(12, 581);
             this.PlayerLabel.Name = "PlayerLabel";
             this.PlayerLabel.Size = new System.Drawing.Size(133, 46);
             this.PlayerLabel.TabIndex = 11;
@@ -199,7 +202,7 @@
             // 
             this.AddEventButton.Enabled = false;
             this.AddEventButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.AddEventButton.Location = new System.Drawing.Point(12, 598);
+            this.AddEventButton.Location = new System.Drawing.Point(12, 708);
             this.AddEventButton.Name = "AddEventButton";
             this.AddEventButton.Size = new System.Drawing.Size(139, 42);
             this.AddEventButton.TabIndex = 13;
@@ -223,7 +226,7 @@
             // AssistantInput
             // 
             this.AssistantInput.FormattingEnabled = true;
-            this.AssistantInput.Location = new System.Drawing.Point(252, 532);
+            this.AssistantInput.Location = new System.Drawing.Point(252, 642);
             this.AssistantInput.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.AssistantInput.MaxDropDownItems = 36;
             this.AssistantInput.Name = "AssistantInput";
@@ -235,18 +238,51 @@
             // 
             this.AssistantLabel.AutoSize = true;
             this.AssistantLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.AssistantLabel.Location = new System.Drawing.Point(244, 471);
+            this.AssistantLabel.Location = new System.Drawing.Point(244, 581);
             this.AssistantLabel.Name = "AssistantLabel";
             this.AssistantLabel.Size = new System.Drawing.Size(182, 46);
             this.AssistantLabel.TabIndex = 15;
             this.AssistantLabel.Text = "Assistant";
             this.AssistantLabel.Visible = false;
             // 
+            // ViewProtocolLabel
+            // 
+            this.ViewProtocolLabel.AutoSize = true;
+            this.ViewProtocolLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 25.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.ViewProtocolLabel.Location = new System.Drawing.Point(12, 9);
+            this.ViewProtocolLabel.Name = "ViewProtocolLabel";
+            this.ViewProtocolLabel.Size = new System.Drawing.Size(297, 52);
+            this.ViewProtocolLabel.TabIndex = 17;
+            this.ViewProtocolLabel.Text = "View protocol:";
+            // 
+            // NewProtocolLabel
+            // 
+            this.NewProtocolLabel.AutoSize = true;
+            this.NewProtocolLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 25.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.NewProtocolLabel.Location = new System.Drawing.Point(11, 136);
+            this.NewProtocolLabel.Name = "NewProtocolLabel";
+            this.NewProtocolLabel.Size = new System.Drawing.Size(290, 52);
+            this.NewProtocolLabel.TabIndex = 18;
+            this.NewProtocolLabel.Text = "New protocol:";
+            // 
+            // GameInput
+            // 
+            this.GameInput.FormattingEnabled = true;
+            this.GameInput.Location = new System.Drawing.Point(21, 73);
+            this.GameInput.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.GameInput.Name = "GameInput";
+            this.GameInput.Size = new System.Drawing.Size(280, 24);
+            this.GameInput.TabIndex = 19;
+            this.GameInput.SelectedIndexChanged += new System.EventHandler(this.GameInput_SelectedIndexChanged);
+            // 
             // ProtocolForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1581, 853);
+            this.Controls.Add(this.GameInput);
+            this.Controls.Add(this.NewProtocolLabel);
+            this.Controls.Add(this.ViewProtocolLabel);
             this.Controls.Add(this.AssistantInput);
             this.Controls.Add(this.AssistantLabel);
             this.Controls.Add(this.SaveProtocolButton);
@@ -293,5 +329,8 @@
         private System.Windows.Forms.Button SaveProtocolButton;
         private System.Windows.Forms.ComboBox AssistantInput;
         private System.Windows.Forms.Label AssistantLabel;
+        private System.Windows.Forms.Label ViewProtocolLabel;
+        private System.Windows.Forms.Label NewProtocolLabel;
+        private System.Windows.Forms.ComboBox GameInput;
     }
 }
