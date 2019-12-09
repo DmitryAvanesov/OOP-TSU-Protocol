@@ -50,6 +50,7 @@
             this.GameInput = new System.Windows.Forms.ComboBox();
             this.ViewStatsLabel = new System.Windows.Forms.Label();
             this.StatsInput = new System.Windows.Forms.ComboBox();
+            this.BackButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.MinuteInput)).BeginInit();
             this.SuspendLayout();
             // 
@@ -253,7 +254,7 @@
             this.ViewProtocolLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 25.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.ViewProtocolLabel.Location = new System.Drawing.Point(12, 9);
             this.ViewProtocolLabel.Name = "ViewProtocolLabel";
-            this.ViewProtocolLabel.Size = new System.Drawing.Size(297, 52);
+            this.ViewProtocolLabel.Size = new System.Drawing.Size(293, 51);
             this.ViewProtocolLabel.TabIndex = 17;
             this.ViewProtocolLabel.Text = "View protocol:";
             // 
@@ -263,7 +264,7 @@
             this.NewProtocolLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 25.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.NewProtocolLabel.Location = new System.Drawing.Point(11, 136);
             this.NewProtocolLabel.Name = "NewProtocolLabel";
-            this.NewProtocolLabel.Size = new System.Drawing.Size(290, 52);
+            this.NewProtocolLabel.Size = new System.Drawing.Size(285, 51);
             this.NewProtocolLabel.TabIndex = 18;
             this.NewProtocolLabel.Text = "New protocol:";
             // 
@@ -283,7 +284,7 @@
             this.ViewStatsLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 25.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.ViewStatsLabel.Location = new System.Drawing.Point(315, 9);
             this.ViewStatsLabel.Name = "ViewStatsLabel";
-            this.ViewStatsLabel.Size = new System.Drawing.Size(234, 52);
+            this.ViewStatsLabel.Size = new System.Drawing.Size(231, 51);
             this.ViewStatsLabel.TabIndex = 20;
             this.ViewStatsLabel.Text = "View stats:";
             // 
@@ -297,11 +298,24 @@
             this.StatsInput.TabIndex = 21;
             this.StatsInput.SelectedIndexChanged += new System.EventHandler(this.StatsInput_SelectedIndexChanged);
             // 
+            // BackButton
+            // 
+            this.BackButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.BackButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.BackButton.Location = new System.Drawing.Point(225, 799);
+            this.BackButton.Name = "BackButton";
+            this.BackButton.Size = new System.Drawing.Size(118, 42);
+            this.BackButton.TabIndex = 22;
+            this.BackButton.Text = "Back";
+            this.BackButton.UseVisualStyleBackColor = false;
+            this.BackButton.Click += new System.EventHandler(this.BackButton_Click);
+            // 
             // ProtocolForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1581, 853);
+            this.Controls.Add(this.BackButton);
             this.Controls.Add(this.StatsInput);
             this.Controls.Add(this.ViewStatsLabel);
             this.Controls.Add(this.GameInput);
@@ -358,5 +372,6 @@
         private System.Windows.Forms.ComboBox GameInput;
         private System.Windows.Forms.Label ViewStatsLabel;
         private System.Windows.Forms.ComboBox StatsInput;
+        private System.Windows.Forms.Button BackButton;
     }
 }

@@ -233,7 +233,8 @@ namespace OOP_TSU_Protocol
             {
                 query = $"UPDATE player SET " +
                 $"points = {((BasketballPlayer)player).Points}, " +
-                $"removals = {((BasketballPlayer)player).Removals};";
+                $"removals = {((BasketballPlayer)player).Removals} " +
+                $"WHERE player_ID = {((BasketballPlayer)player).Id};";
             }
 
             var cmdDatabase = new MySqlCommand(query, _conDatabase);

@@ -48,7 +48,7 @@ namespace OOP_TSU_Protocol
 
             _userInterface = new UserInterface<T1, T2>(GameInput, StatsInput, HomeTeamInput,
                 GuestTeamInput, DateInput, MinuteInput, EventTypeInput, PlayerInput, AssistantLabel,
-                AssistantInput, AddEventButton, SaveProtocolButton, EventsPanel);
+                AssistantInput, AddEventButton, SaveProtocolButton, BackButton, EventsPanel);
             _database = new Database<T1, T2>(_userInterface);
             _userInterface.CurrentDatabase = _database;
             _games = new List<Game<T1, T2>>();
@@ -296,6 +296,12 @@ namespace OOP_TSU_Protocol
 
             _database.UpdateData();
 
+            Hide();
+            _mainForm.Show();
+        }
+
+        private void BackButton_Click(object sender, EventArgs e)
+        {
             Hide();
             _mainForm.Show();
         }

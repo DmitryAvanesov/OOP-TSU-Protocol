@@ -23,6 +23,7 @@ namespace OOP_TSU_Protocol
         public ComboBox AssistantInput { get; private set; }
         private Button _addEventButton;
         private Button _saveProtocolButton;
+        private Button _backButton;
         private Panel _eventsPanel;
 
         private ICollection<ComboItem<Game<T1, T2>>> _gameComboItems;
@@ -42,7 +43,7 @@ namespace OOP_TSU_Protocol
             ComboBox newHomeTeamInput, ComboBox newGuestTeamInput, DateTimePicker newDateInput,
             NumericUpDown newMinuteInput, ComboBox newEventTypeInput, ComboBox newPlayerInput,
             Label newAssistantLabel, ComboBox newAssistantInput, Button newAddEventButton,
-            Button newSaveProtocolButton, Panel newEventsPanel)
+            Button newSaveProtocolButton, Button newBackButton, Panel newEventsPanel)
         {
             GameInput = newGameInput;
             StatsInput = newStatsInput;
@@ -56,6 +57,7 @@ namespace OOP_TSU_Protocol
             AssistantInput = newAssistantInput;
             _addEventButton = newAddEventButton;
             _saveProtocolButton = newSaveProtocolButton;
+            _backButton = newBackButton;
             _eventsPanel = newEventsPanel;
 
             _gameComboItems = new List<ComboItem<Game<T1, T2>>>();
@@ -69,6 +71,15 @@ namespace OOP_TSU_Protocol
             _leftMargin = 20;
             _stepMargin = 50;
             _fontSize = 16;
+
+            if (typeof(T1) == typeof(FootballTeam))
+            {
+                MinuteInput.Maximum = 90;
+            }
+            else if (typeof(T1) == typeof(BasketballTeam))
+            {
+                MinuteInput.Maximum = 40;
+            }
         }
 
         public void AddStatsTypeItems(Dictionary<ProtocolForm<T1, T2>.StatsType, Type> statsTypes)
@@ -316,8 +327,8 @@ namespace OOP_TSU_Protocol
                     Text = $"{count}.  {values[i]}  |  " +
                     $"{sortedPlayers[i].Name}, " +
                     $"({sortedPlayers[i].Team.Name}, " +
-                    $"#{sortedPlayers[i].Nationality}, " +
-                    $"{sortedPlayers[i].Number}, " +
+                    $"{sortedPlayers[i].Nationality}, " +
+                    $"#{sortedPlayers[i].Number}, " +
                     $"{sortedPlayers[i].Position})",
 
                     Location = new Point(_leftMargin, _eventLabelPosition),
