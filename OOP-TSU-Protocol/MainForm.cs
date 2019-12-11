@@ -14,7 +14,7 @@ namespace OOP_TSU_Protocol
         {
             Hide();
 
-            var protocolForm = new ProtocolForm<FootballTeam, FootballPlayer>(this);
+            var protocolForm = new ManagementForm<FootballTeam, FootballPlayer>(this);
             protocolForm.Show();
         }
 
@@ -22,7 +22,7 @@ namespace OOP_TSU_Protocol
         {
             Hide();
 
-            var protocolForm = new ProtocolForm<BasketballTeam, BasketballPlayer>(this);
+            var protocolForm = new ManagementForm<BasketballTeam, BasketballPlayer>(this);
             protocolForm.Show();
         }
     }

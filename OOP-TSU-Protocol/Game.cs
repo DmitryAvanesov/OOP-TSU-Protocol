@@ -46,5 +46,41 @@ namespace OOP_TSU_Protocol
                 GuestTeamScore += score;
             }
         }
+
+        public void DistributePoints()
+        {
+            if (HomeTeamScore > GuestTeamScore)
+            {
+                if (typeof(T1) == typeof(FootballTeam))
+                {
+                    HomeTeam.AddPoints(3);
+                }
+                else if (typeof(T1) == typeof(BasketballTeam))
+                {
+                    HomeTeam.AddPoints(2);
+                    GuestTeam.AddPoints(1);
+                }
+            }
+            else if (HomeTeamScore < GuestTeamScore)
+            {
+                if (typeof(T1) == typeof(FootballTeam))
+                {
+                    GuestTeam.AddPoints(3);
+                }
+                else if (typeof(T1) == typeof(BasketballTeam))
+                {
+                    HomeTeam.AddPoints(1);
+                    GuestTeam.AddPoints(2);
+                }
+            }
+            else
+            {
+                if (typeof(T1) == typeof(FootballTeam))
+                {
+                    HomeTeam.AddPoints(1);
+                    GuestTeam.AddPoints(1);
+                }
+            }
+        }
     }
 }

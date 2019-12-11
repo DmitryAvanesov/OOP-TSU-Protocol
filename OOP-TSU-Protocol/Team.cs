@@ -39,5 +39,10 @@ namespace OOP_TSU_Protocol
                 Players.Add(currentPlayer);
             }
         }
+
+        public void AddPoints(int points)
+        {
+            Points += points;
+        }
     }
 }

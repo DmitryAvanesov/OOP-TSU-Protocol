@@ -47,7 +47,7 @@ namespace OOP_TSU_Protocol
             _mainForm = mainForm;
 
             _userInterface = new UserInterface<T1, T2>(GameInput, StatsInput, HomeTeamInput,
-                GuestTeamInput, DateInput, MinuteInput, EventTypeInput, PlayerInput, AssistantLabel,
+                GuestTeamInput, MinuteInput, EventTypeInput, PlayerInput, AssistantLabel,
                 AssistantInput, AddEventButton, SaveProtocolButton, BackButton, EventsPanel);
             _database = new Database<T1, T2>(_userInterface);
             _userInterface.CurrentDatabase = _database;

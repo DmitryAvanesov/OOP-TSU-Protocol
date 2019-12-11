@@ -8,6 +8,7 @@ namespace OOP_TSU_Protocol
         public FootballTeam()
         {
             SportId = 1;
+            
             Players = new List<FootballPlayer>().Cast<Player>().ToList();
         }
     }

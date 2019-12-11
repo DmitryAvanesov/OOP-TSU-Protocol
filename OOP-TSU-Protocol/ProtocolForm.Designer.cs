@@ -37,7 +37,6 @@
             this.DateInput = new System.Windows.Forms.DateTimePicker();
             this.HomeTeamLabel = new System.Windows.Forms.Label();
             this.GuestTeamLabel = new System.Windows.Forms.Label();
-            this.HomeTeamInput = new System.Windows.Forms.ComboBox();
             this.GuestTeamInput = new System.Windows.Forms.ComboBox();
             this.PlayerInput = new System.Windows.Forms.ComboBox();
             this.PlayerLabel = new System.Windows.Forms.Label();
@@ -51,6 +50,7 @@
             this.ViewStatsLabel = new System.Windows.Forms.Label();
             this.StatsInput = new System.Windows.Forms.ComboBox();
             this.BackButton = new System.Windows.Forms.Button();
+            this.HomeTeamInput = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.MinuteInput)).BeginInit();
             this.SuspendLayout();
             // 
@@ -58,7 +58,7 @@
             // 
             this.MinuteInput.Enabled = false;
             this.MinuteInput.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.MinuteInput.Location = new System.Drawing.Point(20, 496);
+            this.MinuteInput.Location = new System.Drawing.Point(21, 491);
             this.MinuteInput.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.MinuteInput.Maximum = new decimal(new int[] {
             90,
@@ -83,7 +83,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label1.Location = new System.Drawing.Point(12, 446);
+            this.label1.Location = new System.Drawing.Point(13, 441);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(139, 46);
             this.label1.TabIndex = 1;
@@ -93,7 +93,7 @@
             // 
             this.EventTypeLabel.AutoSize = true;
             this.EventTypeLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.EventTypeLabel.Location = new System.Drawing.Point(199, 446);
+            this.EventTypeLabel.Location = new System.Drawing.Point(200, 441);
             this.EventTypeLabel.Name = "EventTypeLabel";
             this.EventTypeLabel.Size = new System.Drawing.Size(207, 46);
             this.EventTypeLabel.TabIndex = 2;
@@ -103,7 +103,7 @@
             // 
             this.EventTypeInput.Enabled = false;
             this.EventTypeInput.FormattingEnabled = true;
-            this.EventTypeInput.Location = new System.Drawing.Point(207, 508);
+            this.EventTypeInput.Location = new System.Drawing.Point(208, 503);
             this.EventTypeInput.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.EventTypeInput.MaxDropDownItems = 100;
             this.EventTypeInput.Name = "EventTypeInput";
@@ -116,7 +116,7 @@
             this.EventsPanel.AllowDrop = true;
             this.EventsPanel.BackColor = System.Drawing.Color.Gainsboro;
             this.EventsPanel.Dock = System.Windows.Forms.DockStyle.Right;
-            this.EventsPanel.Location = new System.Drawing.Point(681, 0);
+            this.EventsPanel.Location = new System.Drawing.Point(682, 0);
             this.EventsPanel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.EventsPanel.Name = "EventsPanel";
             this.EventsPanel.Size = new System.Drawing.Size(900, 853);
@@ -126,7 +126,7 @@
             // 
             this.DateLabel.AutoSize = true;
             this.DateLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.DateLabel.Location = new System.Drawing.Point(12, 216);
+            this.DateLabel.Location = new System.Drawing.Point(13, 211);
             this.DateLabel.Name = "DateLabel";
             this.DateLabel.Size = new System.Drawing.Size(104, 46);
             this.DateLabel.TabIndex = 5;
@@ -134,7 +134,7 @@
             // 
             // DateInput
             // 
-            this.DateInput.Location = new System.Drawing.Point(20, 266);
+            this.DateInput.Location = new System.Drawing.Point(21, 261);
             this.DateInput.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.DateInput.Name = "DateInput";
             this.DateInput.Size = new System.Drawing.Size(183, 22);
@@ -144,7 +144,7 @@
             // 
             this.HomeTeamLabel.AutoSize = true;
             this.HomeTeamLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.HomeTeamLabel.Location = new System.Drawing.Point(12, 325);
+            this.HomeTeamLabel.Location = new System.Drawing.Point(13, 320);
             this.HomeTeamLabel.Name = "HomeTeamLabel";
             this.HomeTeamLabel.Size = new System.Drawing.Size(226, 46);
             this.HomeTeamLabel.TabIndex = 7;
@@ -154,26 +154,16 @@
             // 
             this.GuestTeamLabel.AutoSize = true;
             this.GuestTeamLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.GuestTeamLabel.Location = new System.Drawing.Point(244, 325);
+            this.GuestTeamLabel.Location = new System.Drawing.Point(245, 320);
             this.GuestTeamLabel.Name = "GuestTeamLabel";
             this.GuestTeamLabel.Size = new System.Drawing.Size(225, 46);
             this.GuestTeamLabel.TabIndex = 8;
             this.GuestTeamLabel.Text = "Guest team";
             // 
-            // HomeTeamInput
-            // 
-            this.HomeTeamInput.FormattingEnabled = true;
-            this.HomeTeamInput.Location = new System.Drawing.Point(20, 375);
-            this.HomeTeamInput.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.HomeTeamInput.Name = "HomeTeamInput";
-            this.HomeTeamInput.Size = new System.Drawing.Size(217, 24);
-            this.HomeTeamInput.TabIndex = 9;
-            this.HomeTeamInput.SelectedIndexChanged += new System.EventHandler(this.HomeTeamInput_SelectedIndexChanged);
-            // 
             // GuestTeamInput
             // 
             this.GuestTeamInput.FormattingEnabled = true;
-            this.GuestTeamInput.Location = new System.Drawing.Point(252, 375);
+            this.GuestTeamInput.Location = new System.Drawing.Point(253, 370);
             this.GuestTeamInput.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.GuestTeamInput.Name = "GuestTeamInput";
             this.GuestTeamInput.Size = new System.Drawing.Size(217, 24);
@@ -184,7 +174,7 @@
             // 
             this.PlayerInput.Enabled = false;
             this.PlayerInput.FormattingEnabled = true;
-            this.PlayerInput.Location = new System.Drawing.Point(20, 642);
+            this.PlayerInput.Location = new System.Drawing.Point(21, 637);
             this.PlayerInput.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.PlayerInput.MaxDropDownItems = 36;
             this.PlayerInput.Name = "PlayerInput";
@@ -195,7 +185,7 @@
             // 
             this.PlayerLabel.AutoSize = true;
             this.PlayerLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.PlayerLabel.Location = new System.Drawing.Point(12, 581);
+            this.PlayerLabel.Location = new System.Drawing.Point(13, 576);
             this.PlayerLabel.Name = "PlayerLabel";
             this.PlayerLabel.Size = new System.Drawing.Size(133, 46);
             this.PlayerLabel.TabIndex = 11;
@@ -205,7 +195,7 @@
             // 
             this.AddEventButton.Enabled = false;
             this.AddEventButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.AddEventButton.Location = new System.Drawing.Point(12, 708);
+            this.AddEventButton.Location = new System.Drawing.Point(13, 703);
             this.AddEventButton.Name = "AddEventButton";
             this.AddEventButton.Size = new System.Drawing.Size(139, 42);
             this.AddEventButton.TabIndex = 13;
@@ -229,7 +219,7 @@
             // AssistantInput
             // 
             this.AssistantInput.FormattingEnabled = true;
-            this.AssistantInput.Location = new System.Drawing.Point(252, 642);
+            this.AssistantInput.Location = new System.Drawing.Point(253, 637);
             this.AssistantInput.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.AssistantInput.MaxDropDownItems = 36;
             this.AssistantInput.Name = "AssistantInput";
@@ -241,7 +231,7 @@
             // 
             this.AssistantLabel.AutoSize = true;
             this.AssistantLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.AssistantLabel.Location = new System.Drawing.Point(244, 581);
+            this.AssistantLabel.Location = new System.Drawing.Point(245, 576);
             this.AssistantLabel.Name = "AssistantLabel";
             this.AssistantLabel.Size = new System.Drawing.Size(182, 46);
             this.AssistantLabel.TabIndex = 15;
@@ -262,7 +252,7 @@
             // 
             this.NewProtocolLabel.AutoSize = true;
             this.NewProtocolLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 25.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.NewProtocolLabel.Location = new System.Drawing.Point(11, 136);
+            this.NewProtocolLabel.Location = new System.Drawing.Point(12, 131);
             this.NewProtocolLabel.Name = "NewProtocolLabel";
             this.NewProtocolLabel.Size = new System.Drawing.Size(285, 51);
             this.NewProtocolLabel.TabIndex = 18;
@@ -310,11 +300,21 @@
             this.BackButton.UseVisualStyleBackColor = false;
             this.BackButton.Click += new System.EventHandler(this.BackButton_Click);
             // 
+            // HomeTeamInput
+            // 
+            this.HomeTeamInput.FormattingEnabled = true;
+            this.HomeTeamInput.Location = new System.Drawing.Point(21, 370);
+            this.HomeTeamInput.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.HomeTeamInput.Name = "HomeTeamInput";
+            this.HomeTeamInput.Size = new System.Drawing.Size(217, 24);
+            this.HomeTeamInput.TabIndex = 23;
+            // 
             // ProtocolForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1581, 853);
+            this.ClientSize = new System.Drawing.Size(1582, 853);
+            this.Controls.Add(this.HomeTeamInput);
             this.Controls.Add(this.BackButton);
             this.Controls.Add(this.StatsInput);
             this.Controls.Add(this.ViewStatsLabel);
@@ -328,7 +328,6 @@
             this.Controls.Add(this.PlayerInput);
             this.Controls.Add(this.PlayerLabel);
             this.Controls.Add(this.GuestTeamInput);
-            this.Controls.Add(this.HomeTeamInput);
             this.Controls.Add(this.GuestTeamLabel);
             this.Controls.Add(this.HomeTeamLabel);
             this.Controls.Add(this.DateInput);
@@ -359,7 +358,6 @@
         private System.Windows.Forms.DateTimePicker DateInput;
         private System.Windows.Forms.Label HomeTeamLabel;
         private System.Windows.Forms.Label GuestTeamLabel;
-        private System.Windows.Forms.ComboBox HomeTeamInput;
         private System.Windows.Forms.ComboBox GuestTeamInput;
         private System.Windows.Forms.ComboBox PlayerInput;
         private System.Windows.Forms.Label PlayerLabel;
@@ -373,5 +371,6 @@
         private System.Windows.Forms.Label ViewStatsLabel;
         private System.Windows.Forms.ComboBox StatsInput;
         private System.Windows.Forms.Button BackButton;
+        private System.Windows.Forms.ComboBox HomeTeamInput;
     }
 }
