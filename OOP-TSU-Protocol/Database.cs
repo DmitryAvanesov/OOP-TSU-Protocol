@@ -87,6 +87,35 @@ namespace OOP_TSU_Protocol
             return gameData;
         }
 
+        public List<List<string>> SelectTeamsToTournament(int tournamentId)
+        {
+            _conDatabase.Open();
+
+            string query = $"SELECT DISTINCT * FROM team WHERE team_ID IN" +
+                $"(SELECT team FROM tournament_team WHERE tournament = {tournamentId})";
+            MySqlCommand command = new MySqlCommand(query, _conDatabase);
+            _reader = command.ExecuteReader();
+
+            var teamData = new List<List<string>>();
+            int currentTeam = 0;
+
+            while (_reader.Read())
+            {
+                teamData.Add(new List<string>());
+
+                for (int i = 0; i < _reader.FieldCount; i++)
+                {
+                    teamData[currentTeam].Add(_reader[i].ToString());
+                }
+
+                currentTeam++;
+            }
+
+            _reader.Close();
+            _conDatabase.Close();
+            return teamData;
+        }
+
         public List<List<string>> SelectGames()
         {
             _conDatabase.Open();
@@ -212,6 +241,31 @@ namespace OOP_TSU_Protocol
 
             var cmdDatabase = new MySqlCommand(query, _conDatabase);
             _reader = cmdDatabase.ExecuteReader();
+
+            _reader.Close();
+            _conDatabase.Close();
+        }
+
+        public void InsertTournamentTeams(Tournament<T1, T2> currentTournament)
+        {
+            _conDatabase.Open();
+            int currentTournamentId;
+
+            string query = $"SELECT tournament_ID FROM tournament " +
+                $"ORDER BY tournament_ID DESC LIMIT 1;";
+            var cmdDatabase = new MySqlCommand(query, _conDatabase);
+            currentTournamentId = int.Parse(cmdDatabase.ExecuteScalar().ToString());
+
+            foreach (var currentTeam in currentTournament.Teams)
+            {
+                query = $"INSERT INTO tournament_team VALUES " +
+                $"({currentTournamentId}, " +
+                $"{currentTeam.Id})";
+
+                cmdDatabase = new MySqlCommand(query, _conDatabase);
+                _reader.Close();
+                _reader = cmdDatabase.ExecuteReader();
+            }
 
             _reader.Close();
             _conDatabase.Close();

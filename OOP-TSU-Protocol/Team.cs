@@ -6,7 +6,7 @@ namespace OOP_TSU_Protocol
     {
         public int Id { get; private set; }
         public string Name { get; private set; }
-        protected string _location;
+        public string Location;
         public int Points { get; private set; }
         public virtual ICollection<Player> Players { get; set; }
 
@@ -17,7 +17,7 @@ namespace OOP_TSU_Protocol
         {
             Id = int.Parse(data[0]);
             Name = data[2];
-            _location = data[3];
+            Location = data[3];
             Points = int.Parse(data[4]);
 
             AddPlayers(newUserInterface, newDatabase);

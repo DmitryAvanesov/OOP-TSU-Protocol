@@ -252,6 +252,7 @@
             this.StatsInput.Name = "StatsInput";
             this.StatsInput.Size = new System.Drawing.Size(280, 24);
             this.StatsInput.TabIndex = 21;
+            this.StatsInput.SelectedIndexChanged += new System.EventHandler(this.StatsInput_SelectedIndexChanged);
             // 
             // BackButton
             // 

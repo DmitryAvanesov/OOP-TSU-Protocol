@@ -38,7 +38,7 @@ namespace OOP_TSU_Protocol
         };
         private Dictionary<StatsType, Type> _statsTypes;
 
-        public ProtocolForm(ManagementForm<T1, T2> managementForm)
+        public ProtocolForm(ManagementForm<T1, T2> managementForm, Tournament<T1, T2> newTournament)
         {
             InitializeComponent();
 
@@ -49,6 +49,7 @@ namespace OOP_TSU_Protocol
                 AssistantInput, AddEventButton, SaveProtocolButton, BackButton, EventsPanel);
             _database = new Database<T1, T2>(_userInterface);
             _userInterface.CurrentDatabase = _database;
+            _tournament = newTournament;
 
             _eventTypes = new Dictionary<EventType, Type>
             {
@@ -150,8 +151,7 @@ namespace OOP_TSU_Protocol
             if (_userInterface.EventTypeInput.SelectedItem != null &&
                 _userInterface.PlayerInput.SelectedItem != null)
             {
-                activeGame.GameInput.SelectedItem).AddEvent(
-                    activeGame, int.Parse(MinuteInput.Value.ToString()),
+                activeGame.AddEvent(activeGame, int.Parse(MinuteInput.Value.ToString()),
                 (EventType)EventTypeInput.SelectedItem,
                 ((ComboItem<T2>)PlayerInput.SelectedItem).Object,
                 (AssistantInput.SelectedItem != null) ?
@@ -202,9 +202,10 @@ namespace OOP_TSU_Protocol
 
         private void SaveProtocolButton_Click(object sender, EventArgs e)
         {
-            _database.InsertGame(_activeGame);
+            Game<T1, T2> activeGame = ((Game<T1, T2>)_userInterface.GameInput.SelectedItem);
+            _database.InsertGame(activeGame);
 
-            foreach (var currentEvent in _activeGame.Events)
+            foreach (var currentEvent in activeGame.Events)
             {
                 _database.InsertEvent(currentEvent);
             }
@@ -219,6 +220,11 @@ namespace OOP_TSU_Protocol
         {
             Hide();
             _managementForm.Show();
+        }
+
+        private void StatsInput_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            _userInterface.WriteStats(_tournament.Teams);
         }
     }
 }

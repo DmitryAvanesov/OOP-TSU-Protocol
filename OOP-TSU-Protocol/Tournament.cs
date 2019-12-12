@@ -29,6 +29,8 @@ namespace OOP_TSU_Protocol
             Title = newData[2];
             NumberOfTeams = int.Parse(newData[3]);
             NumberOfRows = int.Parse(newData[4]);
+            Teams = new List<T1>();
+            Games = new List<Game<T1, T2>>();
         }
     }
 }

@@ -450,7 +450,7 @@ namespace OOP_TSU_Protocol
                 Label eventLabel = new Label
                 {
                     Text = $"{count}.  {values[i]}  |  " +
-                    $"{sortedPlayers[i].Name}, " +
+                    $"{sortedPlayers[i].Name} " +
                     $"({sortedPlayers[i].Team.Name}, " +
                     $"{sortedPlayers[i].Nationality}, " +
                     $"#{sortedPlayers[i].Number}, " +

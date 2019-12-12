@@ -59,7 +59,7 @@ namespace OOP_TSU_Protocol
         private void AddTeamsToTournament(Tournament<T1, T2> tournament)
         {
             T1 currentTeam;
-            var data = _database.SelectGamesToTournament(tournament.Id);
+            var data = _database.SelectTeamsToTournament(tournament.Id);
 
             foreach (var currentTeamData in data)
             {
@@ -172,6 +172,7 @@ namespace OOP_TSU_Protocol
                 _activeTournament.Title = _userInterface.TournamentTitleInput.Text;
 
                 _database.InsertTournament(_activeTournament);
+                _database.InsertTournamentTeams(_activeTournament);
 
                 foreach (var currentGame in _activeTournament.Games)
                 {
@@ -189,7 +190,8 @@ namespace OOP_TSU_Protocol
         {
             Hide();
 
-            var protocolForm = new ProtocolForm<T1, T2>(this);
+            var protocolForm = new ProtocolForm<T1, T2>(this, (
+                (ComboItem<Tournament<T1, T2>>)_userInterface.TournamentInput.SelectedItem).Object);
             protocolForm.Show();
         }
 
