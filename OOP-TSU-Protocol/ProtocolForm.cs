@@ -93,6 +93,8 @@ namespace OOP_TSU_Protocol
 
         private void AddEvents(Game<T1, T2> currentGame)
         {
+            currentGame.Events.Clear();
+
             Event<T1, T2> currentEvent;
             int currentMinute;
             T2 currentPlayer = new T2();

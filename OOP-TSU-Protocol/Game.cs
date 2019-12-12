@@ -92,6 +92,11 @@ namespace OOP_TSU_Protocol
                     HomeTeam.AddPoints(1);
                     GuestTeam.AddPoints(1);
                 }
+                else if (typeof(T1) == typeof(BasketballTeam))
+                {
+                    HomeTeam.AddPoints(1);
+                    GuestTeam.AddPoints(1);
+                }
             }
         }
     }

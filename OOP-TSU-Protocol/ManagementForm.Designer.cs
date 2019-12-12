@@ -31,7 +31,6 @@
             this.SelectTournamentLabel = new System.Windows.Forms.Label();
             this.TournamentInput = new System.Windows.Forms.ComboBox();
             this.SelectTournamentButton = new System.Windows.Forms.Button();
-            this.CreateTournamentButton = new System.Windows.Forms.Button();
             this.NumberOfTeamsInput = new System.Windows.Forms.ComboBox();
             this.NumberOfTeamsLabel = new System.Windows.Forms.Label();
             this.NumberOfRowsLabel = new System.Windows.Forms.Label();
@@ -54,7 +53,7 @@
             // 
             this.SelectTournamentLabel.AutoSize = true;
             this.SelectTournamentLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.SelectTournamentLabel.Location = new System.Drawing.Point(56, 336);
+            this.SelectTournamentLabel.Location = new System.Drawing.Point(39, 45);
             this.SelectTournamentLabel.Name = "SelectTournamentLabel";
             this.SelectTournamentLabel.Size = new System.Drawing.Size(357, 46);
             this.SelectTournamentLabel.TabIndex = 6;
@@ -63,7 +62,7 @@
             // TournamentInput
             // 
             this.TournamentInput.FormattingEnabled = true;
-            this.TournamentInput.Location = new System.Drawing.Point(64, 404);
+            this.TournamentInput.Location = new System.Drawing.Point(47, 113);
             this.TournamentInput.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.TournamentInput.Name = "TournamentInput";
             this.TournamentInput.Size = new System.Drawing.Size(349, 24);
@@ -73,24 +72,13 @@
             // 
             this.SelectTournamentButton.BackColor = System.Drawing.Color.Lavender;
             this.SelectTournamentButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.SelectTournamentButton.Location = new System.Drawing.Point(64, 433);
+            this.SelectTournamentButton.Location = new System.Drawing.Point(47, 142);
             this.SelectTournamentButton.Name = "SelectTournamentButton";
             this.SelectTournamentButton.Size = new System.Drawing.Size(84, 27);
             this.SelectTournamentButton.TabIndex = 21;
             this.SelectTournamentButton.Text = "Select";
             this.SelectTournamentButton.UseVisualStyleBackColor = false;
             this.SelectTournamentButton.Click += new System.EventHandler(this.SelectTournamentButton_Click);
-            // 
-            // CreateTournamentButton
-            // 
-            this.CreateTournamentButton.BackColor = System.Drawing.Color.Lavender;
-            this.CreateTournamentButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.CreateTournamentButton.Location = new System.Drawing.Point(475, 705);
-            this.CreateTournamentButton.Name = "CreateTournamentButton";
-            this.CreateTournamentButton.Size = new System.Drawing.Size(164, 48);
-            this.CreateTournamentButton.TabIndex = 22;
-            this.CreateTournamentButton.Text = "Create";
-            this.CreateTournamentButton.UseVisualStyleBackColor = false;
             // 
             // NumberOfTeamsInput
             // 
@@ -99,7 +87,7 @@
             "2",
             "4",
             "8"});
-            this.NumberOfTeamsInput.Location = new System.Drawing.Point(475, 456);
+            this.NumberOfTeamsInput.Location = new System.Drawing.Point(603, 306);
             this.NumberOfTeamsInput.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.NumberOfTeamsInput.Name = "NumberOfTeamsInput";
             this.NumberOfTeamsInput.Size = new System.Drawing.Size(164, 24);
@@ -110,7 +98,7 @@
             // 
             this.NumberOfTeamsLabel.AutoSize = true;
             this.NumberOfTeamsLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.NumberOfTeamsLabel.Location = new System.Drawing.Point(469, 404);
+            this.NumberOfTeamsLabel.Location = new System.Drawing.Point(597, 254);
             this.NumberOfTeamsLabel.Name = "NumberOfTeamsLabel";
             this.NumberOfTeamsLabel.Size = new System.Drawing.Size(239, 36);
             this.NumberOfTeamsLabel.TabIndex = 24;
@@ -120,7 +108,7 @@
             // 
             this.NumberOfRowsLabel.AutoSize = true;
             this.NumberOfRowsLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.NumberOfRowsLabel.Location = new System.Drawing.Point(469, 527);
+            this.NumberOfRowsLabel.Location = new System.Drawing.Point(597, 377);
             this.NumberOfRowsLabel.Name = "NumberOfRowsLabel";
             this.NumberOfRowsLabel.Size = new System.Drawing.Size(225, 36);
             this.NumberOfRowsLabel.TabIndex = 26;
@@ -132,7 +120,7 @@
             this.NumberOfRowsInput.Items.AddRange(new object[] {
             "1",
             "2"});
-            this.NumberOfRowsInput.Location = new System.Drawing.Point(475, 579);
+            this.NumberOfRowsInput.Location = new System.Drawing.Point(603, 429);
             this.NumberOfRowsInput.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.NumberOfRowsInput.Name = "NumberOfRowsInput";
             this.NumberOfRowsInput.Size = new System.Drawing.Size(164, 24);
@@ -143,7 +131,7 @@
             // 
             this.CreateTournamentLabel.AutoSize = true;
             this.CreateTournamentLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.CreateTournamentLabel.Location = new System.Drawing.Point(467, 195);
+            this.CreateTournamentLabel.Location = new System.Drawing.Point(978, 45);
             this.CreateTournamentLabel.Name = "CreateTournamentLabel";
             this.CreateTournamentLabel.Size = new System.Drawing.Size(364, 46);
             this.CreateTournamentLabel.TabIndex = 27;
@@ -153,7 +141,7 @@
             // 
             this.AddTeamsLabel.AutoSize = true;
             this.AddTeamsLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.AddTeamsLabel.Location = new System.Drawing.Point(852, 289);
+            this.AddTeamsLabel.Location = new System.Drawing.Point(980, 139);
             this.AddTeamsLabel.Name = "AddTeamsLabel";
             this.AddTeamsLabel.Size = new System.Drawing.Size(156, 36);
             this.AddTeamsLabel.TabIndex = 29;
@@ -163,7 +151,7 @@
             // 
             this.TeamInput.Enabled = false;
             this.TeamInput.FormattingEnabled = true;
-            this.TeamInput.Location = new System.Drawing.Point(858, 341);
+            this.TeamInput.Location = new System.Drawing.Point(986, 191);
             this.TeamInput.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.TeamInput.Name = "TeamInput";
             this.TeamInput.Size = new System.Drawing.Size(282, 24);
@@ -171,7 +159,7 @@
             // 
             // TournamentTitleInput
             // 
-            this.TournamentTitleInput.Location = new System.Drawing.Point(475, 339);
+            this.TournamentTitleInput.Location = new System.Drawing.Point(603, 189);
             this.TournamentTitleInput.Name = "TournamentTitleInput";
             this.TournamentTitleInput.Size = new System.Drawing.Size(282, 22);
             this.TournamentTitleInput.TabIndex = 31;
@@ -180,7 +168,7 @@
             // 
             this.TournamentTitleLabel.AutoSize = true;
             this.TournamentTitleLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.TournamentTitleLabel.Location = new System.Drawing.Point(469, 289);
+            this.TournamentTitleLabel.Location = new System.Drawing.Point(597, 139);
             this.TournamentTitleLabel.Name = "TournamentTitleLabel";
             this.TournamentTitleLabel.Size = new System.Drawing.Size(71, 36);
             this.TournamentTitleLabel.TabIndex = 32;
@@ -191,7 +179,7 @@
             this.AddTeamButton.BackColor = System.Drawing.Color.Lavender;
             this.AddTeamButton.Enabled = false;
             this.AddTeamButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.AddTeamButton.Location = new System.Drawing.Point(858, 370);
+            this.AddTeamButton.Location = new System.Drawing.Point(986, 220);
             this.AddTeamButton.Name = "AddTeamButton";
             this.AddTeamButton.Size = new System.Drawing.Size(84, 27);
             this.AddTeamButton.TabIndex = 33;
@@ -205,7 +193,7 @@
             this.TeamOutput.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.TeamOutput.FormattingEnabled = true;
             this.TeamOutput.ItemHeight = 20;
-            this.TeamOutput.Location = new System.Drawing.Point(858, 433);
+            this.TeamOutput.Location = new System.Drawing.Point(986, 283);
             this.TeamOutput.Name = "TeamOutput";
             this.TeamOutput.Size = new System.Drawing.Size(282, 324);
             this.TeamOutput.TabIndex = 34;
@@ -214,7 +202,7 @@
             // 
             this.ScheduleLabel.AutoSize = true;
             this.ScheduleLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.ScheduleLabel.Location = new System.Drawing.Point(1235, 289);
+            this.ScheduleLabel.Location = new System.Drawing.Point(1363, 139);
             this.ScheduleLabel.Name = "ScheduleLabel";
             this.ScheduleLabel.Size = new System.Drawing.Size(140, 36);
             this.ScheduleLabel.TabIndex = 35;
@@ -224,7 +212,7 @@
             // 
             this.CurrentGameLabel.AutoSize = true;
             this.CurrentGameLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.CurrentGameLabel.Location = new System.Drawing.Point(1237, 344);
+            this.CurrentGameLabel.Location = new System.Drawing.Point(1365, 194);
             this.CurrentGameLabel.Name = "CurrentGameLabel";
             this.CurrentGameLabel.Size = new System.Drawing.Size(111, 20);
             this.CurrentGameLabel.TabIndex = 36;
@@ -233,7 +221,7 @@
             // GameDateInput
             // 
             this.GameDateInput.Enabled = false;
-            this.GameDateInput.Location = new System.Drawing.Point(1241, 375);
+            this.GameDateInput.Location = new System.Drawing.Point(1369, 225);
             this.GameDateInput.Name = "GameDateInput";
             this.GameDateInput.Size = new System.Drawing.Size(200, 22);
             this.GameDateInput.TabIndex = 37;
@@ -243,7 +231,7 @@
             this.SaveDateButton.BackColor = System.Drawing.Color.Lavender;
             this.SaveDateButton.Enabled = false;
             this.SaveDateButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.SaveDateButton.Location = new System.Drawing.Point(1241, 413);
+            this.SaveDateButton.Location = new System.Drawing.Point(1369, 263);
             this.SaveDateButton.Name = "SaveDateButton";
             this.SaveDateButton.Size = new System.Drawing.Size(84, 27);
             this.SaveDateButton.TabIndex = 38;
@@ -255,7 +243,7 @@
             // 
             this.BackButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
             this.BackButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.BackButton.Location = new System.Drawing.Point(1387, 788);
+            this.BackButton.Location = new System.Drawing.Point(1451, 799);
             this.BackButton.Name = "BackButton";
             this.BackButton.Size = new System.Drawing.Size(118, 42);
             this.BackButton.TabIndex = 39;
@@ -284,7 +272,6 @@
             this.Controls.Add(this.NumberOfRowsInput);
             this.Controls.Add(this.NumberOfTeamsLabel);
             this.Controls.Add(this.NumberOfTeamsInput);
-            this.Controls.Add(this.CreateTournamentButton);
             this.Controls.Add(this.SelectTournamentButton);
             this.Controls.Add(this.TournamentInput);
             this.Controls.Add(this.SelectTournamentLabel);
@@ -301,7 +288,6 @@
         private System.Windows.Forms.Label SelectTournamentLabel;
         private System.Windows.Forms.ComboBox TournamentInput;
         private System.Windows.Forms.Button SelectTournamentButton;
-        private System.Windows.Forms.Button CreateTournamentButton;
         private System.Windows.Forms.ComboBox NumberOfTeamsInput;
         private System.Windows.Forms.Label NumberOfTeamsLabel;
         private System.Windows.Forms.Label NumberOfRowsLabel;
