@@ -136,6 +136,7 @@
             this.GameInput.Name = "GameInput";
             this.GameInput.Size = new System.Drawing.Size(217, 24);
             this.GameInput.TabIndex = 10;
+            this.GameInput.SelectedIndexChanged += new System.EventHandler(this.GameInput_SelectedIndexChanged);
             // 
             // PlayerInput
             // 
@@ -233,6 +234,7 @@
             this.ProtocolInput.Name = "ProtocolInput";
             this.ProtocolInput.Size = new System.Drawing.Size(280, 24);
             this.ProtocolInput.TabIndex = 19;
+            this.ProtocolInput.SelectedIndexChanged += new System.EventHandler(this.ProtocolInput_SelectedIndexChanged);
             // 
             // ViewStatsLabel
             // 

@@ -188,11 +188,14 @@ namespace OOP_TSU_Protocol
 
         private void SelectTournamentButton_Click(object sender, EventArgs e)
         {
-            Hide();
+            if (_userInterface.TournamentInput.SelectedItem != null)
+            {
+                Hide();
 
-            var protocolForm = new ProtocolForm<T1, T2>(this, (
-                (ComboItem<Tournament<T1, T2>>)_userInterface.TournamentInput.SelectedItem).Object);
-            protocolForm.Show();
+                var protocolForm = new ProtocolForm<T1, T2>(this, (
+                    (ComboItem<Tournament<T1, T2>>)_userInterface.TournamentInput.SelectedItem).Object);
+                protocolForm.Show();
+            }
         }
 
         private void BackButton_Click(object sender, EventArgs e)

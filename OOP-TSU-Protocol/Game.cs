@@ -13,7 +13,7 @@ namespace OOP_TSU_Protocol
         public T1 GuestTeam { get; private set; }
         public int HomeTeamScore { get; private set; }
         public int GuestTeamScore { get; private set; }
-        public int Played { get; private set; }
+        public int Played { get; set; }
         public ICollection<Event<T1, T2>> Events { get; set; }
         public string Name { get; private set; }
 
@@ -25,7 +25,7 @@ namespace OOP_TSU_Protocol
             GuestTeamScore = 0;
             Played = 0;
             Events = new List<Event<T1, T2>>();
-            Name = $"{HomeTeam.Name} - {GuestTeam.Name}";
+            Name = $"{HomeTeam.Name}  -  {GuestTeam.Name}";
         }
 
         public Game(List<string> data, T1 newHostTeam, T1 newGuestTeam)

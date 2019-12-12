@@ -72,6 +72,7 @@ namespace OOP_TSU_Protocol
             };
 
             AddProtocols();
+            AddGames();
             _userInterface.AddEventTypeItems(_eventTypes);
             _userInterface.AddStatsTypeItems(_statsTypes);
         }
@@ -139,6 +140,19 @@ namespace OOP_TSU_Protocol
             }
         }
 
+        private void AddGames()
+        {
+            foreach (var game in _tournament.Games)
+            {
+                if (game.Played == 0)
+                {
+                    _userInterface.AddGameComboItem(game);
+                }
+            }
+
+            _userInterface.AddGameComboItemsToComboBox();
+        }
+
         private void EventTypeInput_SelectedIndexChanged(object sender, EventArgs e)
         {
             _userInterface.OnEventTypeInputIndexChange();
@@ -146,7 +160,8 @@ namespace OOP_TSU_Protocol
 
         private void AddEventButton_Click(object sender, EventArgs e)
         {
-            Game<T1, T2> activeGame = ((Game<T1, T2>)_userInterface.GameInput.SelectedItem);
+            Game<T1, T2> activeGame =
+                ((ComboItem<Game<T1, T2>>)_userInterface.GameInput.SelectedItem).Object;
 
             if (_userInterface.EventTypeInput.SelectedItem != null &&
                 _userInterface.PlayerInput.SelectedItem != null)
@@ -202,12 +217,15 @@ namespace OOP_TSU_Protocol
 
         private void SaveProtocolButton_Click(object sender, EventArgs e)
         {
-            Game<T1, T2> activeGame = ((Game<T1, T2>)_userInterface.GameInput.SelectedItem);
-            _database.InsertGame(activeGame);
+            Game<T1, T2> activeGame =
+                ((ComboItem<Game<T1, T2>>)_userInterface.GameInput.SelectedItem).Object;
+
+            activeGame.Played = 1;
+            _database.UpdateGameData(activeGame);
 
             foreach (var currentEvent in activeGame.Events)
             {
-                _database.InsertEvent(currentEvent);
+                _database.InsertEvent(currentEvent, activeGame);
             }
 
             _database.UpdateData();
@@ -225,6 +243,16 @@ namespace OOP_TSU_Protocol
         private void StatsInput_SelectedIndexChanged(object sender, EventArgs e)
         {
             _userInterface.WriteStats(_tournament.Teams);
+        }
+
+        private void GameInput_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            _userInterface.OnGameInputIndexChange();
+        }
+
+        private void ProtocolInput_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            _userInterface.OnProtocolInputIndexChanged();
         }
     }
 }

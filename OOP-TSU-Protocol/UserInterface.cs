@@ -36,6 +36,7 @@ namespace OOP_TSU_Protocol
         private Panel _eventsPanel;
 
         private ICollection<ComboItem<Tournament<T1, T2>>> _tournamentComboItems;
+        private ICollection<ComboItem<Game<T1, T2>>> _protocolComboItems;
         private ICollection<ComboItem<Game<T1, T2>>> _gameComboItems;
         private ICollection<ProtocolForm<T1, T2>.StatsType> _statsComboItems;
         private ICollection<ComboItem<T1>> _teamComboItems;
@@ -92,9 +93,9 @@ namespace OOP_TSU_Protocol
             _eventsPanel = newEventsPanel;
 
             _tournamentComboItems = new List<ComboItem<Tournament<T1, T2>>>();
+            _protocolComboItems = new List<ComboItem<Game<T1, T2>>>();
             _gameComboItems = new List<ComboItem<Game<T1, T2>>>();
             _statsComboItems = new List<ProtocolForm<T1, T2>.StatsType>();
-            _teamComboItems = new List<ComboItem<T1>>();
             _playerComboItems = new List<ComboItem<T2>>();
             _eventComboItems = new List<ProtocolForm<T1, T2>.EventType>();
 
@@ -246,12 +247,22 @@ namespace OOP_TSU_Protocol
 
         public void AddProtocolComboItem(Game<T1, T2> currentGame)
         {
-            _gameComboItems.Add(new ComboItem<Game<T1, T2>>(currentGame.Name, currentGame));
+            _protocolComboItems.Add(new ComboItem<Game<T1, T2>>(currentGame.Name, currentGame));
         }
 
         public void AddProtocolComboItemsToComboBox()
         {
-            ProtocolInput.Items.AddRange(_gameComboItems.Cast<object>().ToArray());
+            ProtocolInput.Items.AddRange(_protocolComboItems.Cast<object>().ToArray());
+        }
+
+        public void AddGameComboItem(Game<T1, T2> currentGame)
+        {
+            _gameComboItems.Add(new ComboItem<Game<T1, T2>>(currentGame.Name, currentGame));
+        }
+
+        public void AddGameComboItemsToComboBox()
+        {
+            GameInput.Items.AddRange(_gameComboItems.Cast<object>().ToArray());
         }
 
         public void AddPlayerComboItem(T2 currentPlayer)
@@ -266,7 +277,7 @@ namespace OOP_TSU_Protocol
             _playerComboItems.Clear();
         }
 
-        public void OnGameInputIndexChanged()
+        public void OnProtocolInputIndexChanged()
         {
             _eventsPanel.Controls.Clear();
             _eventLabelPosition = 20;
@@ -278,26 +289,24 @@ namespace OOP_TSU_Protocol
             }
         }
 
-        public void OnTeamInputIndexChange(ComboBox thisTeamInput, ComboBox otherTeamInput)
+        public void OnGameInputIndexChange()
         {
-            thisTeamInput.Enabled = false;
-            var selectedItem = (ComboItem<T1>)thisTeamInput.SelectedItem;
+            GameInput.Enabled = false;
+            var selectedItem = (ComboItem<Game<T1, T2>>)GameInput.SelectedItem;
 
-            foreach (T2 player in selectedItem.Object.Players)
+            foreach (T2 player in selectedItem.Object.HomeTeam.Players)
+            {
+                AddPlayerComboItem(player);
+            }
+
+            foreach (T2 player in selectedItem.Object.GuestTeam.Players)
             {
                 AddPlayerComboItem(player);
             }
 
             AddPlayerComboItemsToComboBoxes();
 
-            if (!otherTeamInput.Enabled)
-            {
-                EnableInput();
-            }
-            else
-            {
-                otherTeamInput.Items.Remove(thisTeamInput.SelectedItem);
-            }
+            EnableInput();
         }
 
         public void OnEventTypeInputIndexChange()
@@ -471,7 +480,6 @@ namespace OOP_TSU_Protocol
         {
             ProtocolInput.Enabled = false;
             StatsInput.Enabled = false;
-            DateInput.Enabled = false;
             MinuteInput.Enabled = true;
             EventTypeInput.Enabled = true;
             PlayerInput.Enabled = true;
