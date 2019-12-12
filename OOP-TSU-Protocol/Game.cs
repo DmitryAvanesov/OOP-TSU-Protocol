@@ -8,25 +8,37 @@ namespace OOP_TSU_Protocol
         where T2 : Player, new()
     {
         public int Id { get; private set; }
-        public DateTime Date { get; private set; }
+        public DateTime Date { get; set; }
         public T1 HomeTeam { get; private set; }
         public T1 GuestTeam { get; private set; }
         public int HomeTeamScore { get; private set; }
         public int GuestTeamScore { get; private set; }
+        public int Played { get; private set; }
         public ICollection<Event<T1, T2>> Events { get; set; }
         public string Name { get; private set; }
 
-    public Game(int newId, DateTime newDate, T1 newHostTeam, T1 newGuestTeam,
-            int newHomeTeamScore = 0, int newGuestTeamScore = 0)
+        public Game(T1 newHostTeam, T1 newGuestTeam)
         {
-            Id = newId;
-            Date = newDate;
             HomeTeam = newHostTeam;
             GuestTeam = newGuestTeam;
-            HomeTeamScore = newHomeTeamScore;
-            GuestTeamScore = newGuestTeamScore;
+            HomeTeamScore = 0;
+            GuestTeamScore = 0;
+            Played = 0;
             Events = new List<Event<T1, T2>>();
-            Name = $"{HomeTeam.Name}  {HomeTeamScore} : {GuestTeamScore}  {GuestTeam.Name}";
+            Name = $"{HomeTeam.Name} - {GuestTeam.Name}";
+        }
+
+        public Game(List<string> data, T1 newHostTeam, T1 newGuestTeam)
+        {
+            Id = int.Parse(data[0]);
+            Date = Convert.ToDateTime(data[2]);
+            HomeTeam = newHostTeam;
+            GuestTeam = newGuestTeam;
+            HomeTeamScore = int.Parse(data[5]);
+            GuestTeamScore = int.Parse(data[6]);
+            Played = int.Parse(data[7]);
+            Events = new List<Event<T1, T2>>();
+            Name = $"{HomeTeam.Name} - {GuestTeam.Name}";
         }
 
         public void AddEvent(Game<T1, T2> newGame, int newMinute,

@@ -11,16 +11,17 @@ namespace OOP_TSU_Protocol
         where T1 : Team, new()
         where T2 : Player, new()
     {
+        public ComboBox TournamentInput { get; private set; }
         public TextBox TournamentTitleInput { get; private set; }
         public ComboBox NumberOfTeamsInput { get; private set; }
         public ComboBox NumberOfRowsInput { get; private set; }
         public ComboBox TeamInput { get; private set; }
+        public ListBox TeamOutput { get; private set; }
         public Label CurrentGameLabel { get; private set; }
         public DateTimePicker GameDateInput { get; private set; }
-        public ComboBox GameInput { get; private set; }
+        public ComboBox ProtocolInput { get; private set; }
         public ComboBox StatsInput { get; private set; }
-        public ComboBox HomeTeamInput { get; private set; }
-        public ComboBox GuestTeamInput { get; private set; }
+        public ComboBox GameInput { get; private set; }
         public DateTimePicker DateInput { get; private set; }
         public NumericUpDown MinuteInput { get; private set; }
         public ComboBox EventTypeInput { get; private set; }
@@ -28,13 +29,13 @@ namespace OOP_TSU_Protocol
         public Label AssistantLabel { get; private set; }
         public ComboBox AssistantInput { get; private set; }
         private Button _addTeamButton;
-        private ListBox _teamOutput;
         private Button _saveDateButton;
         private Button _addEventButton;
         private Button _saveProtocolButton;
         private Button _backButton;
         private Panel _eventsPanel;
 
+        private ICollection<ComboItem<Tournament<T1, T2>>> _tournamentComboItems;
         private ICollection<ComboItem<Game<T1, T2>>> _gameComboItems;
         private ICollection<ProtocolForm<T1, T2>.StatsType> _statsComboItems;
         private ICollection<ComboItem<T1>> _teamComboItems;
@@ -47,35 +48,39 @@ namespace OOP_TSU_Protocol
         private int _leftMargin;
         private int _stepMargin;
         private int _fontSize;
+        private int _scheduleCurrentTeam;
 
-        public UserInterface(TextBox newTournamentTitleInput, ComboBox newNumberOfTeamsInput,
-            ComboBox newNumberOfRowsInput, ComboBox newTeamInput, Label newCurrentGameLabel,
-            DateTimePicker newGameDateInput, Button newAddTeamButton, ListBox newTeamOutput,
-            Button newSaveDateButton)
+        public UserInterface(ComboBox newTournamentInput, TextBox newTournamentTitleInput,
+            ComboBox newNumberOfTeamsInput, ComboBox newNumberOfRowsInput, ComboBox newTeamInput,
+            Label newCurrentGameLabel, DateTimePicker newGameDateInput, Button newAddTeamButton,
+            ListBox newTeamOutput, Button newSaveDateButton)
         {
+            TournamentInput = newTournamentInput;
             TournamentTitleInput = newTournamentTitleInput;
             NumberOfTeamsInput = newNumberOfTeamsInput;
             NumberOfRowsInput = newNumberOfRowsInput;
             TeamInput = newTeamInput;
+            TeamOutput = newTeamOutput;
             CurrentGameLabel = newCurrentGameLabel;
             GameDateInput = newGameDateInput;
             _addTeamButton = newAddTeamButton;
-            _teamOutput = newTeamOutput;
             _saveDateButton = newSaveDateButton;
 
+            _tournamentComboItems = new List<ComboItem<Tournament<T1, T2>>>();
             _teamComboItems = new List<ComboItem<T1>>();
+
+            _scheduleCurrentTeam = 0;
         }
 
-        public UserInterface(ComboBox newGameInput, ComboBox newStatsInput,
-            ComboBox newHomeTeamInput, ComboBox newGuestTeamInput, NumericUpDown newMinuteInput,
+        public UserInterface(ComboBox newProtocolInput, ComboBox newStatsInput,
+            ComboBox newGameInput, NumericUpDown newMinuteInput,
             ComboBox newEventTypeInput, ComboBox newPlayerInput,
             Label newAssistantLabel, ComboBox newAssistantInput, Button newAddEventButton,
             Button newSaveProtocolButton, Button newBackButton, Panel newEventsPanel)
         {
-            GameInput = newGameInput;
+            ProtocolInput = newProtocolInput;
             StatsInput = newStatsInput;
-            HomeTeamInput = newHomeTeamInput;
-            GuestTeamInput = newGuestTeamInput;
+            GameInput = newGameInput;
             MinuteInput = newMinuteInput;
             EventTypeInput = newEventTypeInput;
             PlayerInput = newPlayerInput;
@@ -86,6 +91,7 @@ namespace OOP_TSU_Protocol
             _backButton = newBackButton;
             _eventsPanel = newEventsPanel;
 
+            _tournamentComboItems = new List<ComboItem<Tournament<T1, T2>>>();
             _gameComboItems = new List<ComboItem<Game<T1, T2>>>();
             _statsComboItems = new List<ProtocolForm<T1, T2>.StatsType>();
             _teamComboItems = new List<ComboItem<T1>>();
@@ -109,6 +115,20 @@ namespace OOP_TSU_Protocol
         }
 
         //////////////////////////////// MANAGEMENT FORM METHODS //////////////////////////////////
+
+
+        public void AddTournamentComboItem(Tournament<T1, T2> currentTournament)
+        {
+            _tournamentComboItems.Add(
+                new ComboItem<Tournament<T1, T2>>(currentTournament.Title, currentTournament));
+        }
+
+        public void AddTournamentComboItemsToComboBox()
+        {
+            TournamentInput.Items.Clear();
+            TournamentInput.Items.AddRange(_tournamentComboItems.Cast<object>().ToArray());
+            _tournamentComboItems.Clear();
+        }
 
         public void AddTeamComboItem(T1 currentTeam)
         {
@@ -135,7 +155,7 @@ namespace OOP_TSU_Protocol
         public bool CheckTeamSelectingCorrectness()
         {
             if (TeamInput.SelectedItem != null &&
-                _teamOutput.Items.Count < int.Parse(NumberOfTeamsInput.SelectedItem.ToString()))
+                TeamOutput.Items.Count < int.Parse(NumberOfTeamsInput.SelectedItem.ToString()))
             {
                 return true;
             }
@@ -143,23 +163,57 @@ namespace OOP_TSU_Protocol
             return false;
         }
 
-        public void ChooseTeam()
+        public bool ChooseTeam()
         {
-            _teamOutput.Items.Add(TeamInput.SelectedItem);
+            TeamOutput.Items.Add(TeamInput.SelectedItem);
             TeamInput.Items.RemoveAt(TeamInput.SelectedIndex);
 
-            if (_teamOutput.Items.Count == int.Parse(NumberOfTeamsInput.SelectedItem.ToString()))
+            if (TeamOutput.Items.Count == int.Parse(NumberOfTeamsInput.SelectedItem.ToString()))
             {
                 GameDateInput.Enabled = true;
                 _saveDateButton.Enabled = true;
                 TeamInput.Enabled = false;
                 _addTeamButton.Enabled = false;
+
+                return true;
             }
+
+            return false;
         }
 
-        public void SetDateNext(ICollection<T1> teams)
+        public bool SetDateNext(IList<Game<T1, T2>> games)
         {
-            
+            if (_scheduleCurrentTeam < games.Count)
+            {
+                CurrentGameLabel.Text = games[_scheduleCurrentTeam].Name;
+
+                if (_scheduleCurrentTeam > 0)
+                {
+                    games[_scheduleCurrentTeam - 1].Date = GameDateInput.Value;
+                }
+
+                _scheduleCurrentTeam++;
+
+                return false;
+            }
+
+            return true;
+        }
+
+        public void ReloadForm()
+        {
+            NumberOfTeamsInput.Enabled = true;
+            NumberOfRowsInput.Enabled = true;
+            TeamInput.Enabled = false;
+            _addTeamButton.Enabled = false;
+            GameDateInput.Enabled = false;
+            _saveDateButton.Enabled = false;
+
+            TournamentTitleInput.Text = "";
+            NumberOfTeamsInput.SelectedItem = null;
+            NumberOfRowsInput.SelectedItem = null;
+            TeamInput.SelectedItem = null;
+            TeamOutput.Items.Clear();
         }
 
         //////////////////////////////// PROTOCOL FORM METHODS //////////////////////////////////
@@ -190,14 +244,14 @@ namespace OOP_TSU_Protocol
             EventTypeInput.Items.AddRange(_eventComboItems.Cast<object>().ToArray());
         }
 
-        public void AddGameComboItem(Game<T1, T2> currentGame)
+        public void AddProtocolComboItem(Game<T1, T2> currentGame)
         {
             _gameComboItems.Add(new ComboItem<Game<T1, T2>>(currentGame.Name, currentGame));
         }
 
-        public void AddGameComboItemsToComboBox()
+        public void AddProtocolComboItemsToComboBox()
         {
-            GameInput.Items.AddRange(_gameComboItems.Cast<object>().ToArray());
+            ProtocolInput.Items.AddRange(_gameComboItems.Cast<object>().ToArray());
         }
 
         public void AddPlayerComboItem(T2 currentPlayer)
@@ -218,7 +272,7 @@ namespace OOP_TSU_Protocol
             _eventLabelPosition = 20;
 
             foreach (var currentEvent in
-                ((ComboItem<Game<T1, T2>>)GameInput.SelectedItem).Object.Events)
+                ((ComboItem<Game<T1, T2>>)ProtocolInput.SelectedItem).Object.Events)
             {
                 WriteEvent(currentEvent);
             }
@@ -415,7 +469,7 @@ namespace OOP_TSU_Protocol
 
         private void EnableInput()
         {
-            GameInput.Enabled = false;
+            ProtocolInput.Enabled = false;
             StatsInput.Enabled = false;
             DateInput.Enabled = false;
             MinuteInput.Enabled = true;

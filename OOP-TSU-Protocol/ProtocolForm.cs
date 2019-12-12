@@ -10,13 +10,11 @@ namespace OOP_TSU_Protocol
         where T1 : Team, new()
         where T2 : Player, new()
     {
-        private MainForm _mainForm;
+        private ManagementForm<T1, T2> _managementForm;
 
         private UserInterface<T1, T2> _userInterface;
         private Database<T1, T2> _database;
-        private ICollection<T1> _teams;
-        private ICollection<Game<T1, T2>> _games;
-        private Game<T1, T2> _activeGame;
+        private Tournament<T1, T2> _tournament;
 
         public enum EventType
         {
@@ -40,19 +38,17 @@ namespace OOP_TSU_Protocol
         };
         private Dictionary<StatsType, Type> _statsTypes;
 
-        public ProtocolForm(MainForm mainForm)
+        public ProtocolForm(ManagementForm<T1, T2> managementForm)
         {
             InitializeComponent();
 
-            _mainForm = mainForm;
+            _managementForm = managementForm;
 
-            _userInterface = new UserInterface<T1, T2>(GameInput, StatsInput, HomeTeamInput,
-                GuestTeamInput, MinuteInput, EventTypeInput, PlayerInput, AssistantLabel,
+            _userInterface = new UserInterface<T1, T2>(ProtocolInput, StatsInput,
+                GameInput, MinuteInput, EventTypeInput, PlayerInput, AssistantLabel,
                 AssistantInput, AddEventButton, SaveProtocolButton, BackButton, EventsPanel);
             _database = new Database<T1, T2>(_userInterface);
             _userInterface.CurrentDatabase = _database;
-            _games = new List<Game<T1, T2>>();
-            _teams = new List<T1>();
 
             _eventTypes = new Dictionary<EventType, Type>
             {
@@ -74,54 +70,23 @@ namespace OOP_TSU_Protocol
                 { StatsType.Removals, typeof(BasketballPlayer) }
             };
 
-            AddTeams();
-            AddGames();
+            AddProtocols();
             _userInterface.AddEventTypeItems(_eventTypes);
             _userInterface.AddStatsTypeItems(_statsTypes);
         }
 
-        private void AddGames()
+        private void AddProtocols()
         {
-            Game<T1, T2> currentGame;
-            int currentId;
-            DateTime currentDate;
-            T1 currentHomeTeam = new T1();
-            T1 currentGuestTeam = new T1();
-            int currentHomeTeamScore;
-            int currentGuestTeamScore;
-
-            var data = _database.SelectGames();
-
-            foreach (var currentGameData in data)
+            foreach (var currentGame in _tournament.Games)
             {
-                currentId = int.Parse(currentGameData[0]);
-                currentDate = Convert.ToDateTime(currentGameData[2]);
-
-                foreach (var team in _teams)
+                if (currentGame.Played == 1)
                 {
-                    if (team.Id == int.Parse(currentGameData[3]))
-                    {
-                        currentHomeTeam = team;
-                    }
-
-                    if (team.Id == int.Parse(currentGameData[4]))
-                    {
-                        currentGuestTeam = team;
-                    }
+                    AddEvents(currentGame);
+                    _userInterface.AddProtocolComboItem(currentGame);
                 }
-
-                currentHomeTeamScore = int.Parse(currentGameData[5]);
-                currentGuestTeamScore = int.Parse(currentGameData[6]);
-
-                currentGame = new Game<T1, T2>(currentId, currentDate, currentHomeTeam,
-                    currentGuestTeam, currentHomeTeamScore, currentGuestTeamScore);
-                AddEvents(currentGame);
-                
-                _games.Add(currentGame);
-                _userInterface.AddGameComboItem(currentGame);
             }
 
-            _userInterface.AddGameComboItemsToComboBox();
+            _userInterface.AddProtocolComboItemsToComboBox();
         }
 
         private void AddEvents(Game<T1, T2> currentGame)
@@ -173,59 +138,6 @@ namespace OOP_TSU_Protocol
             }
         }
 
-        private void AddTeams()
-        {
-            T1 currentTeam = new T1();
-            var data = _database.SelectTeams();
-            
-            foreach (var currentTeamData in data)
-            {
-                currentTeam.InitializeTeam(currentTeamData, _userInterface, _database);
-                _teams.Add(currentTeam);
-                _userInterface.AddTeamComboItem(currentTeam);
-                currentTeam = new T1();
-            }
-
-            _userInterface.AddTeamComboItemsToComboBox();
-        }
-
-        private void GameInput_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            _userInterface.OnGameInputIndexChanged();
-        }
-
-        private void StatsInput_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            _userInterface.WriteStats(_teams);
-        }
-
-        private void HomeTeamInput_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            _userInterface.OnTeamInputIndexChange(HomeTeamInput, GuestTeamInput);
-
-            if (_userInterface.GameCreated)
-            {
-                InitializeGame();
-            }
-        }
-
-        private void GuestTeamInput_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            _userInterface.OnTeamInputIndexChange(GuestTeamInput, HomeTeamInput);
-
-            if (_userInterface.GameCreated)
-            {
-                InitializeGame();
-            }
-        }
-
-        private void InitializeGame()
-        {
-            _activeGame = new Game<T1, T2>(0, DateInput.Value,
-                ((ComboItem<T1>)HomeTeamInput.SelectedItem).Object,
-                ((ComboItem<T1>)GuestTeamInput.SelectedItem).Object);
-        }
-
         private void EventTypeInput_SelectedIndexChanged(object sender, EventArgs e)
         {
             _userInterface.OnEventTypeInputIndexChange();
@@ -233,17 +145,20 @@ namespace OOP_TSU_Protocol
 
         private void AddEventButton_Click(object sender, EventArgs e)
         {
+            Game<T1, T2> activeGame = ((Game<T1, T2>)_userInterface.GameInput.SelectedItem);
+
             if (_userInterface.EventTypeInput.SelectedItem != null &&
                 _userInterface.PlayerInput.SelectedItem != null)
             {
-                _activeGame.AddEvent(_activeGame, int.Parse(MinuteInput.Value.ToString()),
+                activeGame.GameInput.SelectedItem).AddEvent(
+                    activeGame, int.Parse(MinuteInput.Value.ToString()),
                 (EventType)EventTypeInput.SelectedItem,
                 ((ComboItem<T2>)PlayerInput.SelectedItem).Object,
                 (AssistantInput.SelectedItem != null) ?
                 ((ComboItem<T2>)AssistantInput.SelectedItem).Object :
                 null);
 
-                _userInterface.WriteEvent(_activeGame.Events.ToArray()[_activeGame.Events.Count - 1]);
+                _userInterface.WriteEvent(activeGame.Events.ToArray()[activeGame.Events.Count - 1]);
                 var player = ((ComboItem<T2>)PlayerInput.SelectedItem).Object;
 
                 if ((EventType)EventTypeInput.SelectedItem == EventType.Goal)
@@ -254,7 +169,7 @@ namespace OOP_TSU_Protocol
                         (((ComboItem<T2>)AssistantInput.SelectedItem).Object
                         as FootballPlayer).AddAssist();
                     }
-                    _activeGame.IncreaseScore((T1)player.Team);
+                    activeGame.IncreaseScore((T1)player.Team);
                 }
                 else if ((EventType)EventTypeInput.SelectedItem == EventType.Yellow_card)
                 {
@@ -267,12 +182,12 @@ namespace OOP_TSU_Protocol
                 else if ((EventType)EventTypeInput.SelectedItem == EventType.Two_points_shot)
                 {
                     player.IncreaseScore(2);
-                    _activeGame.IncreaseScore((T1)player.Team, 2);
+                    activeGame.IncreaseScore((T1)player.Team, 2);
                 }
                 else if ((EventType)EventTypeInput.SelectedItem == EventType.Three_points_shot)
                 {
                     player.IncreaseScore(3);
-                    _activeGame.IncreaseScore((T1)player.Team, 3);
+                    activeGame.IncreaseScore((T1)player.Team, 3);
                 }
                 else if ((EventType)EventTypeInput.SelectedItem == EventType.Removal)
                 {
@@ -297,13 +212,13 @@ namespace OOP_TSU_Protocol
             _database.UpdateData();
 
             Hide();
-            _mainForm.Show();
+            _managementForm.Show();
         }
 
         private void BackButton_Click(object sender, EventArgs e)
         {
             Hide();
-            _mainForm.Show();
+            _managementForm.Show();
         }
     }
 }

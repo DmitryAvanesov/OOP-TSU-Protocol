@@ -47,6 +47,7 @@
             this.CurrentGameLabel = new System.Windows.Forms.Label();
             this.GameDateInput = new System.Windows.Forms.DateTimePicker();
             this.SaveDateButton = new System.Windows.Forms.Button();
+            this.BackButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // SelectTournamentLabel
@@ -78,6 +79,7 @@
             this.SelectTournamentButton.TabIndex = 21;
             this.SelectTournamentButton.Text = "Select";
             this.SelectTournamentButton.UseVisualStyleBackColor = false;
+            this.SelectTournamentButton.Click += new System.EventHandler(this.SelectTournamentButton_Click);
             // 
             // CreateTournamentButton
             // 
@@ -89,7 +91,6 @@
             this.CreateTournamentButton.TabIndex = 22;
             this.CreateTournamentButton.Text = "Create";
             this.CreateTournamentButton.UseVisualStyleBackColor = false;
-            this.CreateTournamentButton.Click += new System.EventHandler(this.CreateTournamentButton_Click);
             // 
             // NumberOfTeamsInput
             // 
@@ -250,11 +251,24 @@
             this.SaveDateButton.UseVisualStyleBackColor = false;
             this.SaveDateButton.Click += new System.EventHandler(this.SaveDateButton_Click);
             // 
+            // BackButton
+            // 
+            this.BackButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.BackButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.BackButton.Location = new System.Drawing.Point(1387, 788);
+            this.BackButton.Name = "BackButton";
+            this.BackButton.Size = new System.Drawing.Size(118, 42);
+            this.BackButton.TabIndex = 39;
+            this.BackButton.Text = "Back";
+            this.BackButton.UseVisualStyleBackColor = false;
+            this.BackButton.Click += new System.EventHandler(this.BackButton_Click);
+            // 
             // ManagementForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1582, 853);
+            this.Controls.Add(this.BackButton);
             this.Controls.Add(this.SaveDateButton);
             this.Controls.Add(this.GameDateInput);
             this.Controls.Add(this.CurrentGameLabel);
@@ -303,5 +317,6 @@
         private System.Windows.Forms.Label CurrentGameLabel;
         private System.Windows.Forms.DateTimePicker GameDateInput;
         private System.Windows.Forms.Button SaveDateButton;
+        private System.Windows.Forms.Button BackButton;
     }
 }

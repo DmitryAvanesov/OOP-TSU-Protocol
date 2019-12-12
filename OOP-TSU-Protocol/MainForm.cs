@@ -14,16 +14,16 @@ namespace OOP_TSU_Protocol
         {
             Hide();
 
-            var protocolForm = new ManagementForm<FootballTeam, FootballPlayer>(this);
-            protocolForm.Show();
+            var managementForm = new ManagementForm<FootballTeam, FootballPlayer>(this);
+            managementForm.Show();
         }
 
         private void BasketballButton_Click(object sender, EventArgs e)
         {
             Hide();
 
-            var protocolForm = new ManagementForm<BasketballTeam, BasketballPlayer>(this);
-            protocolForm.Show();
+            var managementForm = new ManagementForm<BasketballTeam, BasketballPlayer>(this);
+            managementForm.Show();
         }
     }
 }

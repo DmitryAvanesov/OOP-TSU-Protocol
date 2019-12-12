@@ -15,16 +15,83 @@ namespace OOP_TSU_Protocol
         private MySqlConnection _conDatabase = new MySqlConnection(_connectionString);
         private MySqlDataReader _reader;
 
+        private int _sportId;
+
         public Database(UserInterface<T1, T2> newUserInterface)
         {
             _userInterface = newUserInterface;
+
+            if (typeof(T1) == typeof(FootballTeam))
+            {
+                _sportId = 1;
+            }
+            else if (typeof(T1) == typeof(BasketballTeam))
+            {
+                _sportId = 2;
+            }
+        }
+
+        public List<List<string>> SelectTournaments()
+        {
+            _conDatabase.Open();
+
+            string query = $"SELECT * FROM tournament WHERE sport = {_sportId}";
+            MySqlCommand command = new MySqlCommand(query, _conDatabase);
+            _reader = command.ExecuteReader();
+
+            var tournamentData = new List<List<string>>();
+            int currentTournament = 0;
+
+            while (_reader.Read())
+            {
+                tournamentData.Add(new List<string>());
+
+                for (int i = 0; i < _reader.FieldCount; i++)
+                {
+                    tournamentData[currentTournament].Add(_reader[i].ToString());
+                }
+
+                currentTournament++;
+            }
+
+            _reader.Close();
+            _conDatabase.Close();
+            return tournamentData;
+        }
+
+        public List<List<string>> SelectGamesToTournament(int tournamentId)
+        {
+            _conDatabase.Open();
+
+            string query = $"SELECT * FROM game WHERE tournament = {tournamentId}";
+            MySqlCommand command = new MySqlCommand(query, _conDatabase);
+            _reader = command.ExecuteReader();
+
+            var gameData = new List<List<string>>();
+            int currentGame = 0;
+
+            while (_reader.Read())
+            {
+                gameData.Add(new List<string>());
+
+                for (int i = 0; i < _reader.FieldCount; i++)
+                {
+                    gameData[currentGame].Add(_reader[i].ToString());
+                }
+
+                currentGame++;
+            }
+
+            _reader.Close();
+            _conDatabase.Close();
+            return gameData;
         }
 
         public List<List<string>> SelectGames()
         {
             _conDatabase.Open();
 
-            string query = $"SELECT * FROM game WHERE sport = {Team.SportId}";
+            string query = $"SELECT * FROM game WHERE sport = {_sportId}";
             MySqlCommand command = new MySqlCommand(query, _conDatabase);
             _reader = command.ExecuteReader();
 
@@ -80,7 +147,7 @@ namespace OOP_TSU_Protocol
         {
             _conDatabase.Open();
 
-            string query = $"SELECT * FROM team WHERE sport = {Team.SportId}";
+            string query = $"SELECT * FROM team WHERE sport = {_sportId}";
             MySqlCommand command = new MySqlCommand(query, _conDatabase);
             _reader = command.ExecuteReader();
 
@@ -108,7 +175,7 @@ namespace OOP_TSU_Protocol
         {
             _conDatabase.Open();
 
-            string query = $"SELECT * FROM player WHERE sport = {Team.SportId} AND team = {team}";
+            string query = $"SELECT * FROM player WHERE sport = {_sportId} AND team = {team}";
             MySqlCommand command = new MySqlCommand(query, _conDatabase);
             _reader = command.ExecuteReader();
 
@@ -132,20 +199,46 @@ namespace OOP_TSU_Protocol
             return playerData;
         }
 
+        public void InsertTournament(Tournament<T1, T2> currentTournament)
+        {
+            _conDatabase.Open();
+
+            string query = $"INSERT INTO tournament VALUES " +
+                $"(NULL, " +
+                $"{_sportId}, " +
+                $"'{currentTournament.Title}', " +
+                $"{currentTournament.NumberOfTeams}, " +
+                $"{currentTournament.NumberOfRows})";
+
+            var cmdDatabase = new MySqlCommand(query, _conDatabase);
+            _reader = cmdDatabase.ExecuteReader();
+
+            _reader.Close();
+            _conDatabase.Close();
+        }
+
         public void InsertGame(Game<T1, T2> currentGame)
         {
             _conDatabase.Open();
 
-            string query = $"INSERT INTO game VALUES" +
-                $"(NULL," +
-                $"{Team.SportId}," +
-                $"'{currentGame.Date}'," +
-                $"{currentGame.HomeTeam.Id}," +
-                $"{currentGame.GuestTeam.Id}," +
-                $"{currentGame.HomeTeamScore}," +
-                $"{currentGame.GuestTeamScore});";
+            int currentTournamentId;
 
+            string query = $"SELECT tournament_ID FROM tournament " +
+                $"ORDER BY tournament_ID DESC LIMIT 1;";
             var cmdDatabase = new MySqlCommand(query, _conDatabase);
+            currentTournamentId = int.Parse(cmdDatabase.ExecuteScalar().ToString());
+
+            query = $"INSERT INTO game VALUES " +
+                $"(NULL, " +
+                $"{currentTournamentId}, " +
+                $"'{currentGame.Date}', " +
+                $"{currentGame.HomeTeam.Id}, " +
+                $"{currentGame.GuestTeam.Id}, " +
+                $"{currentGame.HomeTeamScore}, " +
+                $"{currentGame.GuestTeamScore}, " +
+                $"{currentGame.Played});";
+
+            cmdDatabase = new MySqlCommand(query, _conDatabase);
             _reader = cmdDatabase.ExecuteReader();
 
             _reader.Close();
@@ -186,17 +279,19 @@ namespace OOP_TSU_Protocol
         {
             _conDatabase.Open();
 
-            UpdateTeamData(((ComboItem<T1>)_userInterface.HomeTeamInput.SelectedItem).Object);
-            UpdateTeamData(((ComboItem<T1>)_userInterface.GuestTeamInput.SelectedItem).Object);
+            UpdateTeamData(
+                ((ComboItem<Game<T1, T2>>)_userInterface.GameInput.SelectedItem).Object.HomeTeam);
+            UpdateTeamData(
+                ((ComboItem<Game<T1, T2>>)_userInterface.GameInput.SelectedItem).Object.GuestTeam);
 
-            foreach (var player in
-                ((ComboItem<T1>)_userInterface.HomeTeamInput.SelectedItem).Object.Players)
+            foreach (var player in (
+                (ComboItem<Game<T1, T2>>)_userInterface.GameInput.SelectedItem).Object.HomeTeam.Players)
             {
                 UpdatePlayerData(player);
             }
 
             foreach (var player in
-                ((ComboItem<T1>)_userInterface.GuestTeamInput.SelectedItem).Object.Players)
+                ((ComboItem<T1>)_userInterface.GameInput.SelectedItem).Object.Players)
             {
                 UpdatePlayerData(player);
             }

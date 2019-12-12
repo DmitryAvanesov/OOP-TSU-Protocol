@@ -5,7 +5,6 @@ namespace OOP_TSU_Protocol
     public abstract class Team
     {
         public int Id { get; private set; }
-        public static int SportId { get; protected set; }
         public string Name { get; private set; }
         protected string _location;
         public int Points { get; private set; }
@@ -21,7 +20,7 @@ namespace OOP_TSU_Protocol
             _location = data[3];
             Points = int.Parse(data[4]);
 
-            AddPlayers<T1, T2>(newUserInterface, newDatabase);
+            AddPlayers(newUserInterface, newDatabase);
         }
 
         public void AddPlayers<T1, T2>(UserInterface<T1, T2> userInterface,
