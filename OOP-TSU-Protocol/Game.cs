@@ -65,37 +65,39 @@ namespace OOP_TSU_Protocol
             {
                 if (typeof(T1) == typeof(FootballTeam))
                 {
-                    HomeTeam.AddPoints(3);
+                    HomeTeam.Points = 3;
+                    GuestTeam.Points = 0;
                 }
                 else if (typeof(T1) == typeof(BasketballTeam))
                 {
-                    HomeTeam.AddPoints(2);
-                    GuestTeam.AddPoints(1);
+                    HomeTeam.Points = 2;
+                    GuestTeam.Points = 1;
                 }
             }
             else if (HomeTeamScore < GuestTeamScore)
             {
                 if (typeof(T1) == typeof(FootballTeam))
                 {
-                    GuestTeam.AddPoints(3);
+                    HomeTeam.Points = 0;
+                    GuestTeam.Points = 3;
                 }
                 else if (typeof(T1) == typeof(BasketballTeam))
                 {
-                    HomeTeam.AddPoints(1);
-                    GuestTeam.AddPoints(2);
+                    HomeTeam.Points = 1;
+                    GuestTeam.Points = 2;
                 }
             }
             else
             {
                 if (typeof(T1) == typeof(FootballTeam))
                 {
-                    HomeTeam.AddPoints(1);
-                    GuestTeam.AddPoints(1);
+                    HomeTeam.Points = 1;
+                    GuestTeam.Points = 1;
                 }
                 else if (typeof(T1) == typeof(BasketballTeam))
                 {
-                    HomeTeam.AddPoints(1);
-                    GuestTeam.AddPoints(1);
+                    HomeTeam.Points = 1;
+                    GuestTeam.Points = 1;
                 }
             }
         }

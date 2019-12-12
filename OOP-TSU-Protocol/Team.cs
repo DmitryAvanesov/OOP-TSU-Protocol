@@ -6,8 +6,8 @@ namespace OOP_TSU_Protocol
     {
         public int Id { get; private set; }
         public string Name { get; private set; }
-        public string Location;
-        public int Points { get; private set; }
+        public string Location { get; private set; }
+        public int Points { get; set; }
         public virtual ICollection<Player> Players { get; set; }
 
         public void InitializeTeam<T1, T2>(List<string> data,

@@ -476,6 +476,36 @@ namespace OOP_TSU_Protocol
             }
         }
 
+        public void WriteTable(ICollection<T1> teams)
+        {
+            IList<T1> sortedTeams;
+
+            sortedTeams = teams.OrderByDescending(currentTeam =>
+                        (currentTeam as T1).Points).ToList();
+            int count = 1;
+            _eventsPanel.Controls.Clear();
+            _eventLabelPosition = 20;
+
+            for (var i = 0; i < sortedTeams.Count; i++)
+            {
+                Label eventLabel = new Label
+                {
+                    Text = $"{count}. " +
+                    $"{sortedTeams[i].Name} " +
+                    $"({sortedTeams[i].Location})  |  " +
+                    $"{sortedTeams[i].Points} pts",
+
+                    Location = new Point(_leftMargin, _eventLabelPosition),
+                    AutoSize = true,
+                    Font = new Font("Arial", _fontSize - 2)
+                };
+
+                _eventLabelPosition += _stepMargin;
+                _eventsPanel.Controls.Add(eventLabel);
+                count++;
+            }
+        }
+
         private void EnableInput()
         {
             ProtocolInput.Enabled = false;

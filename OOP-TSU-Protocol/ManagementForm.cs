@@ -8,7 +8,7 @@ namespace OOP_TSU_Protocol
         where T1 : Team, new()
         where T2 : Player, new()
     {
-        private MainForm _mainForm;
+        public MainForm MainForm;
 
         private UserInterface<T1, T2> _userInterface;
         private Database<T1, T2> _database;
@@ -20,7 +20,7 @@ namespace OOP_TSU_Protocol
         {
             InitializeComponent();
 
-            _mainForm = newMainForm;
+            MainForm = newMainForm;
 
             _userInterface = new UserInterface<T1, T2>(TournamentInput, TournamentTitleInput,
                 NumberOfTeamsInput, NumberOfRowsInput, TeamInput, CurrentGameLabel, GameDateInput,
@@ -201,7 +201,7 @@ namespace OOP_TSU_Protocol
         private void BackButton_Click(object sender, EventArgs e)
         {
             Hide();
-            _mainForm.Show();
+            MainForm.Show();
         }
     }
 }

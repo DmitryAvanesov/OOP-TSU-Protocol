@@ -210,6 +210,8 @@ namespace OOP_TSU_Protocol
                 {
                     (player as BasketballPlayer).GetRemoval();
                 }
+
+                activeGame.DistributePoints();
             }
             else
             {
@@ -233,7 +235,7 @@ namespace OOP_TSU_Protocol
             _database.UpdateData();
 
             Hide();
-            _managementForm.Show();
+            _managementForm.MainForm.Show();
         }
 
         private void BackButton_Click(object sender, EventArgs e)
@@ -255,6 +257,11 @@ namespace OOP_TSU_Protocol
         private void ProtocolInput_SelectedIndexChanged(object sender, EventArgs e)
         {
             _userInterface.OnProtocolInputIndexChanged();
+        }
+
+        private void TableButton_Click(object sender, EventArgs e)
+        {
+            _userInterface.WriteTable(_tournament.Teams);
         }
     }
 }

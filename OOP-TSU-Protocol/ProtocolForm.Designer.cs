@@ -47,6 +47,7 @@
             this.ViewStatsLabel = new System.Windows.Forms.Label();
             this.StatsInput = new System.Windows.Forms.ComboBox();
             this.BackButton = new System.Windows.Forms.Button();
+            this.TableButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.MinuteInput)).BeginInit();
             this.SuspendLayout();
             // 
@@ -268,11 +269,24 @@
             this.BackButton.UseVisualStyleBackColor = false;
             this.BackButton.Click += new System.EventHandler(this.BackButton_Click);
             // 
+            // TableButton
+            // 
+            this.TableButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.TableButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.TableButton.Location = new System.Drawing.Point(349, 799);
+            this.TableButton.Name = "TableButton";
+            this.TableButton.Size = new System.Drawing.Size(118, 42);
+            this.TableButton.TabIndex = 23;
+            this.TableButton.Text = "Table";
+            this.TableButton.UseVisualStyleBackColor = false;
+            this.TableButton.Click += new System.EventHandler(this.TableButton_Click);
+            // 
             // ProtocolForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1582, 853);
+            this.Controls.Add(this.TableButton);
             this.Controls.Add(this.BackButton);
             this.Controls.Add(this.StatsInput);
             this.Controls.Add(this.ViewStatsLabel);
@@ -323,5 +337,6 @@
         private System.Windows.Forms.Label ViewStatsLabel;
         private System.Windows.Forms.ComboBox StatsInput;
         private System.Windows.Forms.Button BackButton;
+        private System.Windows.Forms.Button TableButton;
     }
 }

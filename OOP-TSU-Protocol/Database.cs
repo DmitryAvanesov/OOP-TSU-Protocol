@@ -375,7 +375,7 @@ namespace OOP_TSU_Protocol
             _conDatabase.Open();
 
             string query = $"UPDATE team SET " +
-                $"points = {team.Points} " +
+                $"points = points + {team.Points} " +
                 $"WHERE team_ID = {team.Id};";
             var cmdDatabase = new MySqlCommand(query, _conDatabase);
             _reader = cmdDatabase.ExecuteReader();
