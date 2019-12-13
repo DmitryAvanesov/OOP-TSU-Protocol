@@ -136,8 +136,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Diagrams\Tournament_classes.png" />
-    <Content Include="Diagrams\Tournament_sequence.png" />
+    <Content Include="Other\Database\tsu-oop-protocol-db 20191213 0756.sql" />
+    <Content Include="Other\Diagrams\Tournament_classes.png" />
+    <Content Include="Other\Diagrams\Tournament_sequence.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
